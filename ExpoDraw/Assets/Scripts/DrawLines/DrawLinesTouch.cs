@@ -49,7 +49,6 @@ public class DrawLinesTouch : MonoBehaviour {
 		if (Input.touchCount > 0) {
 			touch = Input.GetTouch(0);
 			if (touch.phase == TouchPhase.Began) {
-				line.points2.Clear();
 				line.Draw();
 				previousPosition = touch.position;
 				line.points2.Add (touch.position);
@@ -65,4 +64,9 @@ public class DrawLinesTouch : MonoBehaviour {
 			}
 		}
 	}
+
+    public void ClearLines()
+    {
+        line.points2.Clear();
+    }
 }
