@@ -24,8 +24,12 @@ public class DrawLinesTouch : MonoBehaviour {
 	private Texture tex;
 	private float useLineWidth;
 	private Vector3 pointCount;
+    private int colorID = 0;
+
+    private List<VectorLine> lineList = new List<VectorLine>();
 
 	public void Start (){
+        //VectorLine.SetCanvasCamera(this.gameObject.GetComponent<Camera>());
 		if (useEndCap) {
 			VectorLine.SetEndCap ("RoundCap", EndCap.Mirror, capLineTex, capTex);
 			 tex= capLineTex;
@@ -36,8 +40,18 @@ public class DrawLinesTouch : MonoBehaviour {
 			useLineWidth = lineWidth;
 		}
 		
-		line = new VectorLine("DrawnLine", new List<Vector2>(), tex, useLineWidth, LineType.Continuous, Joins.Weld);
-		line.endPointsUpdate = 1;	// Optimization for updating only the last point of the line, and the rest is not re-computed
+		lineList.Add( new VectorLine("RedLine", new List<Vector2>(), tex, useLineWidth, LineType.Continuous, Joins.Weld));
+        lineList[0].color = Color.red;
+        lineList[0].endPointsUpdate = 1;
+        lineList.Add( new VectorLine("GreenLine", new List<Vector2>(), tex, useLineWidth, LineType.Continuous, Joins.Weld));
+        lineList[1].color = Color.green;
+        lineList[1].endPointsUpdate = 1;
+        lineList.Add( new VectorLine("BlueLine", new List<Vector2>(), tex, useLineWidth, LineType.Continuous, Joins.Weld));
+        lineList[2].color = Color.blue;
+        lineList[2].endPointsUpdate = 1;
+
+        line = lineList[colorID];
+		//line.endPointsUpdate = 1;	// Optimization for updating only the last point of the line, and the rest is not re-computed
 		if (useEndCap) {
 			line.endCap = "RoundCap";
 		}
@@ -48,13 +62,15 @@ public class DrawLinesTouch : MonoBehaviour {
 	public void Update (){
 		if (Input.touchCount > 0) {
 			touch = Input.GetTouch(0);
-			if (touch.phase == TouchPhase.Began) {
+			if (touch.phase == TouchPhase.Began) 
+            {
 				line.Draw();
 				previousPosition = touch.position;
 				line.points2.Add (touch.position);
 				canDraw = true;
 			}
-			else if (touch.phase == TouchPhase.Moved && (touch.position - previousPosition).sqrMagnitude > sqrMinPixelMove && canDraw) {
+			else if (touch.phase == TouchPhase.Moved && (touch.position - previousPosition).sqrMagnitude > sqrMinPixelMove && canDraw) 
+            {
 				previousPosition = touch.position;
 				line.points2.Add (touch.position);
 				if (line.points2.Count >= maxPoints) {
@@ -67,6 +83,27 @@ public class DrawLinesTouch : MonoBehaviour {
 
     public void ClearLines()
     {
-        line.points2.Clear();
+        lineList[0].points2.Clear();
+        lineList[1].points2.Clear();
+        lineList[2].points2.Clear();
+        lineList[0].Draw();
+        lineList[1].Draw();
+        lineList[2].Draw();
+    }
+
+    public void ToggleCanDraw(bool state)
+    {
+        lineList[0].Draw();
+        lineList[1].Draw();
+        lineList[2].Draw();
+        canDraw = state;
+    }
+
+    public void ToggleColor()
+    {
+        line = lineList[++colorID % 3];
+        lineList[0].Draw();
+        lineList[1].Draw();
+        lineList[2].Draw();
     }
 }

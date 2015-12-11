@@ -6,11 +6,25 @@ public class UIScript : MonoBehaviour {
 
     public Camera AccessCamera;
 
+    public void SetColor()
+    {
+        AccessCamera.SendMessage("ToggleColor");
+    }
+
     public void OnClearButtonClick()
     {
         AccessCamera.SendMessage("ClearLines");
     }
 
+    public void OnPointerEnter()
+    {
+        AccessCamera.SendMessage("ToggleCanDraw", false);
+    }
+
+    public void OnPointerExit()
+    {
+        AccessCamera.SendMessage("ToggleCanDraw", true);
+    }
 	// Use this for initialization
 	void Start () {
 	
