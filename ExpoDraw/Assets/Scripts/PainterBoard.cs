@@ -10,6 +10,8 @@ public class PainterBoard : MonoBehaviour {
 	public GameObject prefabButton;
 	public RectTransform ParentPanel;
 
+	public GameObject sendTo;
+
 	// Use this for initialization
 	void Start () {
 		for(int i = 0; i < Brushes.Count; i++)
@@ -37,6 +39,7 @@ public class PainterBoard : MonoBehaviour {
 	void ButtonClicked(int buttonNo)
 	{
 		Debug.Log ("Button clicked = " + buttonNo);
+		sendTo.SendMessage ("setBrush", buttonNo);
 //		dlt.test ();
 //		dlt.setBrush(buttonNo);
 
