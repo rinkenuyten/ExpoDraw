@@ -25,6 +25,9 @@ public class DrawLinesTouch : MonoBehaviour {
 	private float useLineWidth;
 	private Vector3 pointCount;
 
+	public List<Texture> brushes;
+	private int selectedBrush = 0;
+
 	public void Start (){
 		if (useEndCap) {
 			VectorLine.SetEndCap ("RoundCap", EndCap.Mirror, capLineTex, capTex);
@@ -32,7 +35,7 @@ public class DrawLinesTouch : MonoBehaviour {
 			 useLineWidth= capLineWidth;
 		}
 		else {
-			tex = lineTex;
+			setBrush (selectedBrush);
 			useLineWidth = lineWidth;
 		}
 		
@@ -69,4 +72,9 @@ public class DrawLinesTouch : MonoBehaviour {
     {
         line.points2.Clear();
     }
+
+	public void setBrush(int sBrush){
+		tex = brushes[sBrush];
+		line = new VectorLine("DrawnLine", new List<Vector2>(), tex, useLineWidth, LineType.Continuous, Joins.Weld);
+	}
 }
