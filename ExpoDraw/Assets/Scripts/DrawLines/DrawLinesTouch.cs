@@ -28,6 +28,9 @@ public class DrawLinesTouch : MonoBehaviour {
 
     private List<VectorLine> lineList = new List<VectorLine>();
 
+	public List<Texture> brushes;
+	private int selectedBrush = 0;
+
 	public void Start (){
         //VectorLine.SetCanvasCamera(this.gameObject.GetComponent<Camera>());
 		if (useEndCap) {
@@ -36,7 +39,7 @@ public class DrawLinesTouch : MonoBehaviour {
 			 useLineWidth= capLineWidth;
 		}
 		else {
-			tex = lineTex;
+			setBrush (selectedBrush);
 			useLineWidth = lineWidth;
 		}
 		
@@ -106,4 +109,9 @@ public class DrawLinesTouch : MonoBehaviour {
         lineList[1].Draw();
         lineList[2].Draw();
     }
+
+	public void setBrush(int sBrush){
+		tex = brushes[sBrush];
+		line = new VectorLine("DrawnLine", new List<Vector2>(), tex, useLineWidth, LineType.Continuous, Joins.Weld);
+	}
 }
