@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class NavigateGUI : MonoBehaviour {
 
     //fields
     public Canvas[] Canvases;
     private Canvas[] lastScreen;
+    private TouchScreenKeyboard keyboard;
     private int currentLayer = 1;
 
     //status variables
@@ -132,6 +134,22 @@ public class NavigateGUI : MonoBehaviour {
             {
                 button.gameObject.SetActive(false);
             }
+        }
+    }
+
+    /// <summary>
+    /// Toggels the status of the keyboard
+    /// </summary>
+    /// <param name="openOrClose">"Open" if it needs to be displayed, "Close" if it needs to be disposed</param>
+    public void ToggleKeyBoard(string openOrClose)
+    {
+        if (openOrClose == "Open")
+        {
+            keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, false, false, "");
+        }
+        else
+        {
+            //Dispose?
         }
     }
 
