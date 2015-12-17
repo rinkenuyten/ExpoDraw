@@ -10,10 +10,13 @@ public class PainterBoard : MonoBehaviour {
 	public GameObject prefabButton;
 	public RectTransform ParentPanel;
 	private DrawLinesTouch dlt;
+	private TouchScreenKeyboard keyboard;
 
 	// Use this for initialization
 	void Start () {
 		
+		//RectTransform.rect.y = 134;
+
 		GameObject drawLineObject = GameObject.FindGameObjectWithTag ("DrawLine");
 
 		if (drawLineObject != null) {
@@ -29,7 +32,8 @@ public class PainterBoard : MonoBehaviour {
 		{
 			GameObject boardButton = (GameObject)Instantiate(prefabButton);
 			boardButton.transform.SetParent(ParentPanel, false);
-			int newY = (-(28 + 5) * i) + 300;
+			int newY = -((1 * i)-4);
+			Debug.Log (newY);
 			Vector3 newVector3 = new Vector3 (boardButton.transform.position.x, newY);
 			boardButton.transform.position = newVector3;
 
@@ -50,6 +54,8 @@ public class PainterBoard : MonoBehaviour {
 	void ButtonClicked(int buttonNo)
 	{
 		Debug.Log ("Button clicked = " + buttonNo);
+		keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
+		keyboard.active = true;
 		dlt.setBrush (buttonNo);
 
 
