@@ -39,7 +39,7 @@ public class DrawLinesTouch : MonoBehaviour {
 			 useLineWidth= capLineWidth;
 		}
 		else {
-			setBrush (selectedBrush);
+            //setBrush (selectedBrush);
 			useLineWidth = lineWidth;
 		}
 		
@@ -63,6 +63,15 @@ public class DrawLinesTouch : MonoBehaviour {
 	}
 
 	public void Update (){
+        if (GameObject.Find("VectorCanvas"))
+        {
+            Canvas DrawCanvas = GameObject.Find("VectorCanvas").GetComponent<Canvas>();
+            DrawCanvas.renderMode = RenderMode.ScreenSpaceCamera;
+            DrawCanvas.worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+            DrawCanvas.pixelPerfect = true;
+        }
+
+
 		if (Input.touchCount > 0) {
 			touch = Input.GetTouch(0);
 			if (touch.phase == TouchPhase.Began) 
@@ -110,8 +119,8 @@ public class DrawLinesTouch : MonoBehaviour {
         lineList[2].Draw();
     }
 
-	public void setBrush(int sBrush){
-		tex = brushes[sBrush];
-		line = new VectorLine("DrawnLine", new List<Vector2>(), tex, useLineWidth, LineType.Continuous, Joins.Weld);
-	}
+    //public void setBrush(int sBrush){
+    //    tex = brushes[sBrush];
+    //    line = new VectorLine("DrawnLine", new List<Vector2>(), tex, useLineWidth, LineType.Continuous, Joins.Weld);
+    //}
 }
