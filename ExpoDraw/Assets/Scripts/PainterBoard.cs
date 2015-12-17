@@ -54,10 +54,6 @@ public class PainterBoard : MonoBehaviour {
 	void ButtonClicked(int buttonNo)
 	{
 		Debug.Log ("Button clicked = " + buttonNo);
-		keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
-		keyboard.active = true;
 		dlt.setBrush (buttonNo);
-
-
 	}
 }
