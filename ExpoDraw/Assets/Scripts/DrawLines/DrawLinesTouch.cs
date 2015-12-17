@@ -114,4 +114,12 @@ public class DrawLinesTouch : MonoBehaviour {
 		tex = brushes[sBrush];
 		line = new VectorLine("DrawnLine", new List<Vector2>(), tex, useLineWidth, LineType.Continuous, Joins.Weld);
 	}
+
+	public void setBrushes(List<Texture> brushes){
+		this.brushes = brushes;
+	}
+
+	public List<Texture> getBrushes(){
+		return brushes;
+	}
 }

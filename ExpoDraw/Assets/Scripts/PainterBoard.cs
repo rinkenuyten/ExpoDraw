@@ -5,16 +5,27 @@ using UnityEngine.UI;
 
 public class PainterBoard : MonoBehaviour {
 
-	public List<Texture> Brushes;
+	private List<Texture> brushes;
 
 	public GameObject prefabButton;
 	public RectTransform ParentPanel;
-
-	public GameObject sendTo;
+	private DrawLinesTouch dlt;
 
 	// Use this for initialization
 	void Start () {
-		for(int i = 0; i < Brushes.Count; i++)
+		
+		GameObject drawLineObject = GameObject.FindGameObjectWithTag ("DrawLine");
+
+		if (drawLineObject != null) {
+			dlt = drawLineObject.GetComponent <DrawLinesTouch>();
+		}
+		else {
+			Debug.Log ("Cannot find GameControler");
+		}
+
+		brushes = dlt.getBrushes ();
+
+		for(int i = 0; i < brushes.Count; i++)
 		{
 			GameObject boardButton = (GameObject)Instantiate(prefabButton);
 			boardButton.transform.SetParent(ParentPanel, false);
@@ -22,7 +33,7 @@ public class PainterBoard : MonoBehaviour {
 			Vector3 newVector3 = new Vector3 (boardButton.transform.position.x, newY);
 			boardButton.transform.position = newVector3;
 
-			Texture brush = Brushes [i];
+			Texture brush = brushes [i];
 			boardButton.GetComponentInChildren<Text> ().text = brush.name;
 
 			Button tempButton = boardButton.GetComponent<Button>();
@@ -39,9 +50,8 @@ public class PainterBoard : MonoBehaviour {
 	void ButtonClicked(int buttonNo)
 	{
 		Debug.Log ("Button clicked = " + buttonNo);
-		sendTo.SendMessage ("setBrush", buttonNo);
-//		dlt.test ();
-//		dlt.setBrush(buttonNo);
+		dlt.setBrush (buttonNo);
+
 
 	}
 }
