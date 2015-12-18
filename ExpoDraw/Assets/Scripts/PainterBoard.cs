@@ -26,7 +26,7 @@ public class PainterBoard : MonoBehaviour {
 			Debug.Log ("Cannot find GameControler");
 		}
 
-		brushes = dlt.getBrushes ();
+		//brushes = dlt.getBrushes ();
 
 		for(int i = 0; i < brushes.Count; i++)
 		{
@@ -56,8 +56,6 @@ public class PainterBoard : MonoBehaviour {
 		Debug.Log ("Button clicked = " + buttonNo);
 		keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
 		keyboard.active = true;
-		dlt.setBrush (buttonNo);
-
-
+		//dlt.setBrush (buttonNo);
 	}
 }

@@ -6,9 +6,10 @@ public class UIScript : MonoBehaviour {
 
     public Camera AccessCamera;
 
-    public void SetColor()
+    public void SetBrush()
     {
-        AccessCamera.SendMessage("ToggleColor");
+
+        AccessCamera.SendMessage("SetBrush", "Thick");
     }
 
     public void OnClearButtonClick()

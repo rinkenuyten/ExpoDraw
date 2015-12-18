@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour {
     public List<Opdracht> Opdrachten;
     public Opdracht ActieveOpdracht;
     public Camera cam;
+    public Texture texture1;
+    public Texture texture2;
 
 	void Start () 
     {
@@ -16,6 +18,23 @@ public class GameManager : MonoBehaviour {
         /////////////////////////////////
         ////// ADD OPDRACHTEN HERE///////
         /////////////////////////////////
+        
+
+        List<int> newInts = new List<int>();
+	    for (int i = 5; i < 8; i++)
+	    {
+	        newInts.Add(i);
+	    }
+
+        List<Texture> newText = new List<Texture>();
+        newText.Add(texture1);
+
+        List<Color> newColor = new List<Color>();
+        newColor.Add(Color.red);
+        newColor.Add(Color.blue);
+
+        Opdrachten.Add(new Opdracht("yolo", newInts, newText, newColor));
+        SetOpdracht(Opdrachten[0]);
 	}
 	
 	void Update () 
@@ -27,6 +46,5 @@ public class GameManager : MonoBehaviour {
     {
         this.ActieveOpdracht = opdracht;
         cam.SendMessage("StartOpdracht", ActieveOpdracht);
-    
     }
 }

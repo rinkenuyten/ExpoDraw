@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,27 +29,17 @@ public class DrawLinesTouch : MonoBehaviour {
     private List<VectorLine> Lines = new List<VectorLine>();
     private VectorLine activeLine;
     private int LineNr;
+
 	public void Start ()
     {
         LineNr = 0;
-        //VectorLine.SetCanvasCamera(this.gameObject.GetComponent<Camera>());
-		if (useEndCap) {
-			VectorLine.SetEndCap ("RoundCap", EndCap.Mirror, capLineTex, capTex);
-			 tex= capLineTex;
-			 useLineWidth= capLineWidth;
-		}
-		else {
-            //setBrush (selectedBrush);
-			useLineWidth = lineWidth;
-		}
+        useLineWidth = lineWidth;
+		
 		
         /// Instantiate Vectorlines here
 
-		//line.endPointsUpdate = 1;	// Optimization for updating only the last point of the line, and the rest is not re-computed
-		if (useEndCap) {
-			line.endCap = "RoundCap";
-		}
-		// Used for .sqrMagnitude, which is faster than .magnitude
+		
+		
 		sqrMinPixelMove = minPixelMove*minPixelMove;
 	}
 
@@ -60,7 +51,6 @@ public class DrawLinesTouch : MonoBehaviour {
             DrawCanvas.worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
             DrawCanvas.pixelPerfect = true;
         }
-
 
 		if (Input.touchCount > 0) {
 			touch = Input.GetTouch(0);
@@ -87,21 +77,37 @@ public class DrawLinesTouch : MonoBehaviour {
     {
         foreach (int size in opdracht.Sizes)
         {
-            foreach (Texture texture in opdracht.Textures)
+            foreach (Texture brush in opdracht.Brush)
             {
                 foreach (Color color in opdracht.Colors)
                 {
-                    Lines.Add(new VectorLine(LineNr.ToString() + color.ToString() + texture.ToString(), new List<Vector2>(), texture, size, 
-                        LineType.Continuous, Joins.Weld));
+                    VectorLine tempLine = new VectorLine(size + "-" + color.GetHashCode() + "-" + brush.name, new List<Vector2>(), brush, size, 
+                        LineType.Continuous, Joins.Weld);
+                    tempLine.color = color;
+                    tempLine.endPointsUpdate = 1;
+                    Lines.Add(tempLine);
                 }
             }
         }
-        activeLine = Lines[0];
+        line = Lines[0];
     }
 
-    public void SetBrush(string brushID)
+    public void SetBrush(string brushName)
     {
-       
+        Debug.Log(brushName);
+        foreach (VectorLine line in Lines)
+        {
+            if (line.name.Contains(brushName))
+            {
+                Debug.Log(line);
+            }   
+        }
     }
+
+    public void ToggleCanDraw(bool Boel)
+    {
+        canDraw = Boel;
+    }
+
 
 }
