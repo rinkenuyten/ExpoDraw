@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using AssemblyCSharp;
 
 public class NavigateGUI : MonoBehaviour {
 
     //fields
+    public GameObject taskButton;
+    private List<Button> cashingObjects;
+    private GameManager gameManager;
     public Canvas[] Canvases;
     private Canvas[] lastScreen;
     private int currentLayer = 1;
@@ -22,6 +27,10 @@ public class NavigateGUI : MonoBehaviour {
         //Array length is based on the maximum layouts you can travel.
         //For example: if you navigate "MainMenu" -> "GameMode" -> "Draw" the minimum size needed will be 3.
         lastScreen = new Canvas[10];
+        gameManager = this.GetComponent<GameManager>();
+        //These objects will be removed if they aren`t in use anymore.
+        //Currently in use for storing the right tasks after loading form the GameManager.
+        cashingObjects = new List<Button>();
 	}
 
     /// <summary>
@@ -64,7 +73,11 @@ public class NavigateGUI : MonoBehaviour {
         {
             if (c == lastScreen[currentLayer - 1])
             {
-                c.enabled = true;         
+                c.enabled = true;
+                if (c.name == "ScanCanvas")
+                {
+                    clearCahse();
+                }
             }
             else
             {
@@ -91,6 +104,7 @@ public class NavigateGUI : MonoBehaviour {
                 c.enabled = false;
             }
         }
+        clearCahse();
     }
 
     /// <summary>
@@ -118,6 +132,49 @@ public class NavigateGUI : MonoBehaviour {
             GameObject textObj = currentCanvas.transform.Find("txtRoomName").gameObject;
             Text textfield = textObj.GetComponent<Text>();
             textfield.text = this.roomName.text;
+        }
+        else if (currentCanvas.name == "TaskCanvas")
+        {
+            GameObject PaintingObj = lastScreen[currentLayer - 1].transform.Find("Nachtwacht").gameObject;
+            Button paintingButton = PaintingObj.GetComponent<Button>();
+            
+            //Searching for the right painting
+            List<Opdracht> tasks = new List<Opdracht>();
+            foreach (Painting p in gameManager.paintings)
+	        {
+                if (p.Name == paintingButton.name)
+                {
+                    tasks = p.Opdrachten;
+                }
+	        }
+
+            Canvas toMoveAndRefresh = new Canvas();
+            //Displaying all found tasks
+            foreach(Canvas c in Canvases) 
+            {
+                if (c.name == "TaskCanvas")
+                {
+                    toMoveAndRefresh = c;
+                }
+            }
+            int yPos = 300;
+            foreach (Opdracht o in tasks)
+            {
+                GameObject objTask = (GameObject)Instantiate(taskButton);
+                objTask.transform.SetParent(currentCanvas.transform, false);
+                objTask.name = o.Name;
+                Vector3 newVector3 = new Vector3(objTask.transform.position.x, yPos);
+                objTask.transform.position = newVector3;
+
+                Button btnTask = objTask.GetComponent<Button>();
+                //btnTask.GetComponent<Text>().text = o.Name;
+                //btnTask.onClick.AddListener(() => MoveTo(toMoveAndRefresh));
+                //btnTask.onClick.AddListener(() => SpecifyCanvas(toMoveAndRefresh));
+
+                cashingObjects.Add(btnTask);
+
+                yPos -= 40;
+            }
         }
         else if (currentCanvas.name == "DescriptionCanvas")
         {
@@ -153,6 +210,19 @@ public class NavigateGUI : MonoBehaviour {
                 button.gameObject.SetActive(false);
             }
         }       
+    }
+
+    /// <summary>
+    /// Clears the found tasks and descriptions.
+    /// </summary>
+    public void clearCahse()
+    {
+        foreach (Button b in cashingObjects)
+        {
+            GameObject obj = GameObject.Find(b.name);
+            Destroy(obj);
+        }
+        cashingObjects.Clear();
     }
 
     /// <summary>
