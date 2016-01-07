@@ -89,6 +89,10 @@ public class DrawLinesTouch : MonoBehaviour {
                 }
             }
         }
+        foreach(VectorLine linetest in Lines)
+        {
+            linetest.Draw();
+        }
         line = Lines[0];
     }
 
@@ -101,6 +105,26 @@ public class DrawLinesTouch : MonoBehaviour {
             {
                 Debug.Log(line);
             }   
+        }
+    }
+
+    public void setColor(string colorname)
+    {
+        foreach (VectorLine line in Lines)
+        {
+            Debug.Log("line color" + line.color.ToString());
+            Debug.Log("line color" + line.color);
+            Debug.Log("colorname" + colorname);
+
+            if (line.color.GetHashCode().ToString() == colorname)
+            {
+ 
+            }
+
+            if (line.name.Contains(colorname))
+            {
+                //if(line.name.Contains(activeLine.name.))
+            }
         }
     }
 

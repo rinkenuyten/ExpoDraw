@@ -6,6 +6,10 @@ public class UIScript : MonoBehaviour {
 
     public Camera AccessCamera;
 
+    public void setColor()
+    {
+        AccessCamera.SendMessage("setColor", "270532608");
+    }
     public void SetBrush()
     {
 
