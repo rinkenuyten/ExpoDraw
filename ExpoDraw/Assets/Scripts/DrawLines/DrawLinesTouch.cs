@@ -36,10 +36,6 @@ public class DrawLinesTouch : MonoBehaviour {
         useLineWidth = lineWidth;
 		
 		
-        /// Instantiate Vectorlines here
-
-		
-		
 		sqrMinPixelMove = minPixelMove*minPixelMove;
 	}
 
@@ -93,7 +89,8 @@ public class DrawLinesTouch : MonoBehaviour {
         {
             linetest.Draw();
         }
-        line = Lines[0];
+        line = Lines[LineNr];
+        Debug.Log("Current Active Line:" + line.name);
     }
 
     public void SetBrush(string brushName)
@@ -108,8 +105,32 @@ public class DrawLinesTouch : MonoBehaviour {
         }
     }
 
+    public void Undo()
+    {
+        Debug.Log("Undid line" + line.name);
+        line.points2.Clear();
+        line.Draw();
+        line = Lines[--LineNr % (Lines.Count - 1)];
+    }
+
+    public void ClearLines()
+    {
+        foreach (VectorLine line in Lines)
+        {
+            line.points2.Clear();
+            line.Draw();
+        }
+    }
+
     public void setColor(string colorname)
     {
+        //Cycles through all the available colors
+        line = Lines[++LineNr % (Lines.Count - 1)];
+        Debug.Log("Current Active Line:" + line.name);
+
+
+        //This is the unfinished code for picking a color from 
+        /*
         foreach (VectorLine line in Lines)
         {
             Debug.Log("line color" + line.color.ToString());
@@ -126,12 +147,11 @@ public class DrawLinesTouch : MonoBehaviour {
                 //if(line.name.Contains(activeLine.name.))
             }
         }
+         */
     }
 
     public void ToggleCanDraw(bool Boel)
     {
         canDraw = Boel;
     }
-
-
 }

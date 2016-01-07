@@ -16,6 +16,11 @@ public class UIScript : MonoBehaviour {
         AccessCamera.SendMessage("SetBrush", "Thick");
     }
 
+    public void OnUndoButtonClick()
+    {
+        AccessCamera.SendMessage("Undo");
+    }
+
     public void OnClearButtonClick()
     {
         AccessCamera.SendMessage("ClearLines");

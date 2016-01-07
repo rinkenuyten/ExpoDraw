@@ -21,10 +21,11 @@ public class GameManager : MonoBehaviour {
         
 
         List<int> newInts = new List<int>();
-	    for (int i = 5; i < 8; i++)
-	    {
-	        newInts.Add(i);
-	    }
+        newInts.Add(2);
+	    newInts.Add(4);
+        newInts.Add(6);
+        newInts.Add(8);
+	    
 
         List<Texture> newText = new List<Texture>();
         newText.Add(texture1);
