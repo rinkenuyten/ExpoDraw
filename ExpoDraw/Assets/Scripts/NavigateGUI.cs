@@ -19,7 +19,8 @@ public class NavigateGUI : MonoBehaviour {
     public string gameMode { get; set; } //Eiteher "SinglePlayer" or "MultiPlayer"
     public string hostOrJoin { get; set; } //Either "Host" or "Join"
     public Text roomName { get; set; }
-    public Text userName { get; set; } 
+    public Text userName { get; set; }
+    public string paintingName { get; set; } //Name of the scanned painting
 
 
 	// Use this for initialization
@@ -135,7 +136,14 @@ public class NavigateGUI : MonoBehaviour {
         }
         else if (currentCanvas.name == "TaskCanvas")
         {
-            GameObject PaintingObj = lastScreen[currentLayer - 1].transform.Find("Nachtwacht").gameObject;
+            Debug.Log(paintingName);
+
+            if (paintingName == null || paintingName == "")
+            {
+                return;
+            }
+
+            GameObject PaintingObj = lastScreen[currentLayer - 1].transform.Find(paintingName).gameObject;
             Button paintingButton = PaintingObj.GetComponent<Button>();
             
             //Searching for the right painting
