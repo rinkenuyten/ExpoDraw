@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour {
 	void Start () 
     {
         Opdrachten = new List<Opdracht>();
+        paintings = new List<Painting>();
+
         Screen.orientation = ScreenOrientation.Portrait;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
@@ -268,7 +270,7 @@ public class GameManager : MonoBehaviour {
 
     public void SetOpdracht(Opdracht opdracht)
     {
-        this.ActieveOpdracht = opdracht;
-        cam.SendMessage("StartOpdracht", ActieveOpdracht);
+        /*this.ActieveOpdracht = opdracht;
+        cam.SendMessage("StartOpdracht", ActieveOpdracht);*/
     }
 }
