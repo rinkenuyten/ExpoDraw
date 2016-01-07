@@ -36,7 +36,7 @@ public class NavigateGUI : MonoBehaviour {
             //This is the current screen (before moving)
             if (c.enabled == true)
             {
-                //If layer is an pop-up layer, dont set them as lastScreen
+                //If layer is a pop-up layer, dont set them as lastScreen
                 if(!c.name.Contains("Popup")){
                     lastScreen[currentLayer] = c;
                     currentLayer++;   
@@ -119,9 +119,28 @@ public class NavigateGUI : MonoBehaviour {
             Text textfield = textObj.GetComponent<Text>();
             textfield.text = this.roomName.text;
         }
+        else if (currentCanvas.name == "DescriptionCanvas")
+        {
+            //When playing singleplayer, the "singleplayerChoose" button needs to be activated.
+            //When playing multiplayer, the "multiplayerChoose" button needs to be activated.
+            GameObject SPbuttonObj = currentCanvas.transform.Find("btnChooseSP").gameObject;
+            Button singleplayerButton = SPbuttonObj.GetComponent<Button>();
+            GameObject MPbuttonObj = currentCanvas.transform.Find("btnChooseMP").gameObject;
+            Button multiplayerButton = MPbuttonObj.GetComponent<Button>();
+            if (gameMode == "SinglePlayer")
+            {
+                singleplayerButton.gameObject.SetActive(true);
+                multiplayerButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                singleplayerButton.gameObject.SetActive(false);
+                multiplayerButton.gameObject.SetActive(true);
+            }
+        }
         else if (currentCanvas.name == "DrawingCanvas")
         {
-            //If you play singleplayer, the "back" button needs to be active.
+            //When playing singleplayer, the "back" button needs to be active.
             //When playing multiplayer, the "back" button needs to be inactive.
             GameObject buttonObj = currentCanvas.transform.Find("btnBack").gameObject;
             Button button = buttonObj.GetComponent<Button>();
@@ -133,7 +152,7 @@ public class NavigateGUI : MonoBehaviour {
             {
                 button.gameObject.SetActive(false);
             }
-        }
+        }       
     }
 
     /// <summary>
