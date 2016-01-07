@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using AssemblyCSharp;
 
 public class GameManager : MonoBehaviour {
     public List<Opdracht> Opdrachten;
@@ -15,10 +16,13 @@ public class GameManager : MonoBehaviour {
         Screen.orientation = ScreenOrientation.Portrait;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
+
+
         /////////////////////////////////
         ////// ADD OPDRACHTEN HERE///////
         /////////////////////////////////
         
+		//--------------------
 
         List<int> newInts = new List<int>();
 	    for (int i = 5; i < 8; i++)
@@ -33,7 +37,13 @@ public class GameManager : MonoBehaviour {
         newColor.Add(Color.red);
         newColor.Add(Color.blue);
 
-        Opdrachten.Add(new Opdracht("yolo", newInts, newText, newColor));
+        Opdrachten.Add(new Opdracht("yolo", "Goede beschrijving", newInts, newText, newColor));
+
+		Painting nachtwacht = new Painting ("Nachtwacht", Opdrachten);
+		//--------------------
+
+
+
         SetOpdracht(Opdrachten[0]);
 	}
 	
