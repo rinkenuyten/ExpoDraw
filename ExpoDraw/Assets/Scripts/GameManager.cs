@@ -33,16 +33,15 @@ public class GameManager : MonoBehaviour {
         /////////////////////////////////
         ////// ADD OPDRACHTEN HERE///////
         /////////////////////////////////
-        
-		//--------------------
 
-        List<int> newInts = new List<int>();
-        newInts.Add(2);
-	    newInts.Add(4);
+        //------------------------------------------------------------------------------------------------------------------------
+
+        newInts = new List<int>();
         newInts.Add(6);
-        newInts.Add(8);
+	    newInts.Add(8);
+        newInts.Add(10);
+        newInts.Add(12);
 	    
-
         
         newColor.Add(Color.red);
         newColor.Add(Color.blue);
@@ -51,8 +50,7 @@ public class GameManager : MonoBehaviour {
 
 		Opdrachten.Add(new Opdracht("Maak van Donker Licht", "Rembrandt heeft dit schilderij erg donker getekend om het realistischer over te laten komen. Teken dit schilderij met lichte kleuren.", newInts, newBrush, newColor));
 
-
-
+        //------------------------------------------------------------------------------------------------------------------------
 
 		newInts = new List<int>();
 		newBrush = new List<Texture> ();
@@ -78,7 +76,7 @@ public class GameManager : MonoBehaviour {
 		Painting nachtwacht = new Painting ("Nachtwacht", Opdrachten);
 		paintings.Add (nachtwacht);
 
-		//--------------------
+        //--------------------------------------------------------------------------------------------------------------------------------------------
 		// new painting
 
 
@@ -136,7 +134,7 @@ public class GameManager : MonoBehaviour {
 		Painting avondmaal = new Painting ("Het Laatste Avondmaal", Opdrachten);
 		paintings.Add(avondmaal);
 
-		//--------------------
+        //--------------------------------------------------------------------------------------------------------------------------------------------
 		// new painting
 
 		Opdrachten.Clear ();
@@ -196,7 +194,7 @@ public class GameManager : MonoBehaviour {
 		paintings.Add(boogie);
 
 
-		//--------------------
+        //--------------------------------------------------------------------------------------------------------------------------------------------
 		// new painting
 
 		Opdrachten.Clear ();
@@ -269,7 +267,7 @@ public class GameManager : MonoBehaviour {
 
     public void SetOpdracht(Opdracht opdracht)
     {
-        /*this.ActieveOpdracht = opdracht;
-        cam.SendMessage("StartOpdracht", ActieveOpdracht);*/
+        this.ActieveOpdracht = opdracht;
+        cam.SendMessage("StartOpdracht", ActieveOpdracht);
     }
 }
