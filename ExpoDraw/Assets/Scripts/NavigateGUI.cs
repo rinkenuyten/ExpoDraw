@@ -139,8 +139,6 @@ public class NavigateGUI : MonoBehaviour {
         }
         else if (currentCanvas.name == "TaskCanvas")
         {
-            Debug.Log(paintingName);
-
             if (paintingName == null || paintingName == "")
             {
                 return;
@@ -180,12 +178,14 @@ public class NavigateGUI : MonoBehaviour {
                 //Button btnTask = objTask.GetComponent<Button>();
                 objTask.GetComponentInChildren<Text>().text = o.Name;
 
-                Button tempBtn = objTask.GetComponent<Button>();
-                tempBtn.onClick.AddListener(() => setCurrentTask(o));
-                tempBtn.onClick.AddListener(() => MoveTo(toMoveAndRefresh));
-                tempBtn.onClick.AddListener(() => SpecifyCanvas(toMoveAndRefresh));
+                //Temporary items so labda works
+                Opdracht tempOpdr = o;
+                Canvas tempToMoveAndRefresh = toMoveAndRefresh;
 
-                Debug.Log("Next Canvas: " + toMoveAndRefresh.name);
+                Button tempBtn = objTask.GetComponent<Button>();
+                tempBtn.onClick.AddListener(() => setCurrentTask(tempOpdr));
+                tempBtn.onClick.AddListener(() => MoveTo(tempToMoveAndRefresh));
+                tempBtn.onClick.AddListener(() => SpecifyCanvas(tempToMoveAndRefresh));
 
                 cashingObjects.Add(objTask);
 
