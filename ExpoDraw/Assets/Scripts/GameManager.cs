@@ -14,6 +14,13 @@ public class GameManager : MonoBehaviour {
 	public Texture texture4;
 	public Texture texture5;
 
+    [SerializeField]
+    List<int> newInts = new List<int>();
+    [SerializeField]
+    List<Texture> newBrush = new List<Texture>();
+    [SerializeField]
+    List<Color> newColor = new List<Color>();
+
 	void Start () 
     {
         Opdrachten = new List<Opdracht>();
@@ -21,13 +28,6 @@ public class GameManager : MonoBehaviour {
 
         Screen.orientation = ScreenOrientation.Portrait;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-
-
-
-		List<int> newInts = new List<int>();
-		List<Texture> newBrush = new List<Texture>();
-		List<Color> newColor = new List<Color>();
-
 
 
         /////////////////////////////////
@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour {
 
         //------------------------------------------------------------------------------------------------------------------------
 
+        newInts.Clear();
 		newInts = new List<int>();
 		newBrush = new List<Texture> ();
 		newColor = new List<Color> ();
