@@ -8,9 +8,12 @@ using AssemblyCSharp;
 public class NavigateGUI : MonoBehaviour {
 
     //fields
+    //Tasks and descriptions:
     public GameObject taskButton;
-    private List<Button> cashingObjects;
+    private List<GameObject> cashingObjects;
     private GameManager gameManager;
+    private Opdracht currentTask;
+    //Navigation:
     public Canvas[] Canvases;
     private Canvas[] lastScreen;
     private int currentLayer = 1;
@@ -31,7 +34,7 @@ public class NavigateGUI : MonoBehaviour {
         gameManager = this.GetComponent<GameManager>();
         //These objects will be removed if they aren`t in use anymore.
         //Currently in use for storing the right tasks after loading form the GameManager.
-        cashingObjects = new List<Button>();
+        cashingObjects = new List<GameObject>();
 	}
 
     /// <summary>
@@ -136,8 +139,6 @@ public class NavigateGUI : MonoBehaviour {
         }
         else if (currentCanvas.name == "TaskCanvas")
         {
-            Debug.Log(paintingName);
-
             if (paintingName == null || paintingName == "")
             {
                 return;
@@ -160,7 +161,7 @@ public class NavigateGUI : MonoBehaviour {
             //Displaying all found tasks
             foreach(Canvas c in Canvases) 
             {
-                if (c.name == "TaskCanvas")
+                if (c.name == "DescriptionCanvas")
                 {
                     toMoveAndRefresh = c;
                 }
@@ -174,12 +175,19 @@ public class NavigateGUI : MonoBehaviour {
                 Vector3 newVector3 = new Vector3(objTask.transform.position.x, yPos);
                 objTask.transform.position = newVector3;
 
-                Button btnTask = objTask.GetComponent<Button>();
-                //btnTask.GetComponent<Text>().text = o.Name;
-                //btnTask.onClick.AddListener(() => MoveTo(toMoveAndRefresh));
-                //btnTask.onClick.AddListener(() => SpecifyCanvas(toMoveAndRefresh));
+                //Button btnTask = objTask.GetComponent<Button>();
+                objTask.GetComponentInChildren<Text>().text = o.Name;
 
-                cashingObjects.Add(btnTask);
+                //Temporary items so labda works
+                Opdracht tempOpdr = o;
+                Canvas tempToMoveAndRefresh = toMoveAndRefresh;
+
+                Button tempBtn = objTask.GetComponent<Button>();
+                tempBtn.onClick.AddListener(() => setCurrentTask(tempOpdr));
+                tempBtn.onClick.AddListener(() => MoveTo(tempToMoveAndRefresh));
+                tempBtn.onClick.AddListener(() => SpecifyCanvas(tempToMoveAndRefresh));
+
+                cashingObjects.Add(objTask);
 
                 yPos -= 40;
             }
@@ -202,6 +210,15 @@ public class NavigateGUI : MonoBehaviour {
                 singleplayerButton.gameObject.SetActive(false);
                 multiplayerButton.gameObject.SetActive(true);
             }
+
+            //Also, the right titel and description needs to be displayed.
+            GameObject txtTitle = currentCanvas.transform.Find("txtTitle").gameObject;
+            Text title = txtTitle.GetComponent<Text>();
+            title.text = currentTask.Name;
+
+            GameObject txtDescription = currentCanvas.transform.Find("txtDescription").gameObject;
+            Text Description = txtDescription.GetComponent<Text>();
+            Description.text = currentTask.Description;
         }
         else if (currentCanvas.name == "DrawingCanvas")
         {
@@ -225,12 +242,22 @@ public class NavigateGUI : MonoBehaviour {
     /// </summary>
     public void clearCahse()
     {
-        foreach (Button b in cashingObjects)
+        foreach (GameObject b in cashingObjects)
         {
             GameObject obj = GameObject.Find(b.name);
             Destroy(obj);
         }
         cashingObjects.Clear();
+    }
+
+    /// <summary>
+    /// When choosing a task, the right description and title needs to be instatiated.
+    /// After the "onclick" from the task-button, the right task will be set active.
+    /// </summary>
+    /// <param name="task">Task that needs to be activated</param>
+    public void setCurrentTask(Opdracht task)
+    {
+        currentTask = task;
     }
 
     /// <summary>
