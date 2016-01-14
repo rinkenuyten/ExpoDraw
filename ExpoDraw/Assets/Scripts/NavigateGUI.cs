@@ -8,6 +8,7 @@ using AssemblyCSharp;
 public class NavigateGUI : MonoBehaviour {
 
     //fields
+    public GameObject GUIManager;
     //Tasks and descriptions:
     public GameObject taskButton;
     private List<GameObject> cashingObjects;
@@ -28,6 +29,7 @@ public class NavigateGUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        DontDestroyOnLoad(GUIManager);
         //Array length is based on the maximum layouts you can travel.
         //For example: if you navigate "MainMenu" -> "GameMode" -> "Draw" the minimum size needed will be 3.
         lastScreen = new Canvas[10];
@@ -58,8 +60,11 @@ public class NavigateGUI : MonoBehaviour {
             //Enable and disable visibility for all canvases
             if (c.name == canvas.name)
             {
-                c.enabled = true;
-                
+                if (c.name == "DrawingCanvas")
+                {
+                    Application.LoadLevel("Workspace_Yamil");
+                }
+                c.enabled = true;          
             }
             else
             {
@@ -81,6 +86,10 @@ public class NavigateGUI : MonoBehaviour {
                 if (c.name == "ScanCanvas")
                 {
                     clearCahse();
+                }
+                else if (c.name == "DrawingCanvas")
+                {
+                    Application.LoadLevel("Workspace_Yamil");
                 }
             }
             else
@@ -166,7 +175,7 @@ public class NavigateGUI : MonoBehaviour {
                     toMoveAndRefresh = c;
                 }
             }
-            int yPos = 300;
+            int yPos = 200;
             foreach (Opdracht o in tasks)
             {
                 GameObject objTask = (GameObject)Instantiate(taskButton);

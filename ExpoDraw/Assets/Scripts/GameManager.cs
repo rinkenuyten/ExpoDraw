@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using AssemblyCSharp;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     public List<Opdracht> Opdrachten;
@@ -23,6 +24,18 @@ public class GameManager : MonoBehaviour {
 
 	void Start () 
     {
+        //Adding eventhandler to the 'ready' button.
+        //Game manager
+        if (Application.loadedLevelName == "Workspace_Yamil")
+        {
+            GameObject GUIManager = GameObject.Find("UIManager").gameObject;
+            NavigateGUI navGUI = GUIManager.GetComponent<NavigateGUI>();
+            //The button
+            GameObject buttonObj = GameObject.Find("ReadyButton").gameObject;
+            Button button = buttonObj.GetComponent<Button>();
+            button.onClick.AddListener(() => Application.LoadLevel("Workspace_Kees"));
+        }        
+
         Opdrachten = new List<Opdracht>();
         paintings = new List<Painting>();
 
@@ -37,10 +50,10 @@ public class GameManager : MonoBehaviour {
         //------------------------------------------------------------------------------------------------------------------------
 
         newInts = new List<int>();
-        newInts.Add(6);
-	    newInts.Add(8);
-        newInts.Add(10);
-        newInts.Add(12);
+        newInts.Add(6 + 5);
+        newInts.Add(8 + 5);
+        newInts.Add(10 + 5);
+        newInts.Add(12 + 5);
 	    
         
         newColor.Add(Color.red);
@@ -57,11 +70,11 @@ public class GameManager : MonoBehaviour {
 		newBrush = new List<Texture> ();
 		newColor = new List<Color> ();
 
-		newInts.Add(1);
-		newInts.Add(4);
-		newInts.Add(6);
-		newInts.Add(9);
-		newInts.Add(12);
+        newInts.Add(1 + 5);
+        newInts.Add(4 + 5);
+        newInts.Add(6 + 5);
+        newInts.Add(9 + 5);
+        newInts.Add(12 + 5);
 
 		newBrush.Add(texture1);
 
@@ -87,8 +100,8 @@ public class GameManager : MonoBehaviour {
 		newBrush = new List<Texture> ();
 		newColor = new List<Color> ();
 
-		newInts.Add(6);
-		newInts.Add(9);
+        newInts.Add(6 + 5);
+        newInts.Add(9 + 5);
 
 		newBrush.Add(texture1);
 		newBrush.Add(texture2);
@@ -104,7 +117,7 @@ public class GameManager : MonoBehaviour {
 		newBrush = new List<Texture> ();
 		newColor = new List<Color> ();
 
-		newInts.Add(4);
+        newInts.Add(4 + 5);
 
 		newBrush.Add(texture1);
 		newBrush.Add(texture2);
@@ -120,8 +133,8 @@ public class GameManager : MonoBehaviour {
 		newBrush = new List<Texture> ();
 		newColor = new List<Color> ();
 
-		newInts.Add(4);
-		newInts.Add(6);
+        newInts.Add(4 + 5);
+        newInts.Add(6 + 5);
 
 		newBrush.Add(texture1);
 
@@ -144,8 +157,8 @@ public class GameManager : MonoBehaviour {
 		newBrush = new List<Texture> ();
 		newColor = new List<Color> ();
 
-		newInts.Add(6);
-		newInts.Add(9);
+        newInts.Add(6 + 5);
+        newInts.Add(9 + 5);
 
 		newBrush.Add(texture1);
 		newBrush.Add(texture2);
@@ -161,9 +174,9 @@ public class GameManager : MonoBehaviour {
 		newBrush = new List<Texture> ();
 		newColor = new List<Color> ();
 
-		newInts.Add(4);
-		newInts.Add(6);
-		newInts.Add(9);
+        newInts.Add(4 + 5);
+        newInts.Add(6 + 5);
+        newInts.Add(9 + 5);
 
 		newBrush.Add(texture1);
 		newBrush.Add(texture2);
@@ -179,9 +192,9 @@ public class GameManager : MonoBehaviour {
 		newBrush = new List<Texture> ();
 		newColor = new List<Color> ();
 
-		newInts.Add(4);
-		newInts.Add(6);
-		newInts.Add(9);
+        newInts.Add(4 + 5);
+        newInts.Add(6 + 5);
+        newInts.Add(9 + 5);
 
 		newBrush.Add(texture1);
 
@@ -204,10 +217,10 @@ public class GameManager : MonoBehaviour {
 		newBrush = new List<Texture> ();
 		newColor = new List<Color> ();
 
-		newInts.Add(1);
-		newInts.Add(4);
-		newInts.Add(6);
-		newInts.Add(9);
+        newInts.Add(1 + 5);
+        newInts.Add(4 + 5);
+        newInts.Add(6 + 5);
+        newInts.Add(9 + 5);
 
 		newBrush.Add(texture1);
 		newBrush.Add(texture2);
@@ -222,9 +235,9 @@ public class GameManager : MonoBehaviour {
 		newBrush = new List<Texture> ();
 		newColor = new List<Color> ();
 
-		newInts.Add(4);
-		newInts.Add(6);
-		newInts.Add(9);
+        newInts.Add(4 + 5);
+        newInts.Add(6 + 5);
+        newInts.Add(9 + 5);
 
 		newBrush.Add(texture1);
 
@@ -240,9 +253,9 @@ public class GameManager : MonoBehaviour {
 		newBrush = new List<Texture> ();
 		newColor = new List<Color> ();
 
-		newInts.Add(4);
-		newInts.Add(6);
-		newInts.Add(9);
+        newInts.Add(4 + 5);
+        newInts.Add(6 + 5);
+        newInts.Add(9 + 5);
 
 		newBrush.Add(texture1);
 
