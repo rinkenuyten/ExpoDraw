@@ -9,8 +9,12 @@ public class PainterBoard : MonoBehaviour {
 
 	public GameObject prefabButton;
 	public RectTransform ParentPanel;
+	public GameObject MenuButton1;
+	public GameObject MenuButton2;
 	private DrawLinesTouch dlt;
 	private TouchScreenKeyboard keyboard;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -57,5 +61,9 @@ public class PainterBoard : MonoBehaviour {
 		keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
 		keyboard.active = true;
 		//dlt.setBrush (buttonNo);
+	}
+
+	void MenuButton2Click(){
+		
 	}
 }
