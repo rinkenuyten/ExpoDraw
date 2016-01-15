@@ -8,6 +8,9 @@ public class UIScript : MonoBehaviour {
 	public GameObject MenuButton1;
 	public GameObject MenuButton2;
 	private bool expanded = false;
+	
+
+	private Color selectedColor;
 
     public void setColor()
     {
@@ -38,6 +41,35 @@ public class UIScript : MonoBehaviour {
     {
         AccessCamera.SendMessage("ToggleCanDraw", true);
     }
+	
+	public void SetActiveColor(string color){
+		
+		Color activeColor = new Color();
+		switch (color)
+		{
+		case "red":
+			activeColor = Color.red;
+			break;
+		case "blue":
+			activeColor = Color.blue;
+			break;
+		case "yellow":
+			activeColor = Color.yellow;
+			break;
+		case "green":
+			activeColor = Color.green;
+			break;
+		case "black":
+			activeColor = Color.black;
+			break;
+		default:
+			activeColor = Color.black;
+			break;
+		}
+			
+		
+		AccessCamera.SendMessage("setColor", activeColor.ToString());
+	}
 	// Use this for initialization
 	void Start () {
 	
@@ -79,4 +111,5 @@ public class UIScript : MonoBehaviour {
 			MenuButton2.transform.FindChild ("painterboard colors").gameObject.SetActive (false);
 		}
 	}
+	
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,13 +22,21 @@ public class DrawLinesTouch : MonoBehaviour {
 	private bool canDraw = false;
 	private Touch touch;
 
+	public GameObject canvas;
+
 	private Texture tex;
 	private float useLineWidth;
 	private Vector3 pointCount;
 
     private List<VectorLine> Lines = new List<VectorLine>();
-    private VectorLine activeLine;
-    private int LineNr;
+	private int LineNr;
+	
+	private int activeSize;
+	private string activeColor;
+	private string activeBrush;
+
+
+	
 
 	public void Start ()
     {
@@ -77,8 +85,10 @@ public class DrawLinesTouch : MonoBehaviour {
             {
                 foreach (Color color in opdracht.Colors)
                 {
-                    VectorLine tempLine = new VectorLine(size + "-" + color.GetHashCode() + "-" + brush.name, new List<Vector2>(), brush, size, 
+					
+					VectorLine tempLine = new VectorLine(size + "," + color.ToString() + "," + brush.name, new List<Vector2>(), brush, size, 
                         LineType.Continuous, Joins.Weld);
+					//tempLine.SetCanvas (canvas);
                     tempLine.color = color;
                     tempLine.endPointsUpdate = 1;
                     Lines.Add(tempLine);
@@ -89,6 +99,10 @@ public class DrawLinesTouch : MonoBehaviour {
         {
             linetest.Draw();
         }
+
+	    activeSize = System.Int32.Parse(Lines [LineNr].name.Split (',') [0]);
+		activeBrush = Lines [LineNr].texture.name;
+	    activeColor = Lines [LineNr].color.ToString();
         line = Lines[LineNr];
         Debug.Log("Current Active Line:" + line.name);
     }
@@ -109,7 +123,8 @@ public class DrawLinesTouch : MonoBehaviour {
     {
         Debug.Log("Undid line" + line.name);
         line.points2.Clear();
-        line.Draw();
+	    line.Draw();
+	    
         line = Lines[--LineNr % (Lines.Count - 1)];
     }
 
@@ -123,33 +138,33 @@ public class DrawLinesTouch : MonoBehaviour {
     }
 
     public void setColor(string colorname)
-    {
-        //Cycles through all the available colors
-        line = Lines[++LineNr % (Lines.Count - 1)];
+	{
+		activeColor = colorname;
+		setLine(activeSize, activeColor, activeBrush);
         Debug.Log("Current Active Line:" + line.name);
+	}
+	
+	public void setSize(int size){
+		activeSize = size;
+		setLine(activeSize, activeColor, activeBrush);
+	}
+	
+	public void setBrush(string brush){
+		activeBrush = brush;
+		setLine(activeSize, activeColor, activeBrush);
+	}
+	
+	public void setLine(int size, string color, string brush){
+		String newLineName = size +","+ color + "," + brush;
 
-
-        //This is the unfinished code for picking a color from 
-        /*
-        foreach (VectorLine line in Lines)
-        {
-            Debug.Log("line color" + line.color.ToString());
-            Debug.Log("line color" + line.color);
-            Debug.Log("colorname" + colorname);
-
-            if (line.color.GetHashCode().ToString() == colorname)
-            {
- 
-            }
-
-            if (line.name.Contains(colorname))
-            {
-                //if(line.name.Contains(activeLine.name.))
-            }
-        }
-         */
-    }
-
+		foreach (VectorLine line in Lines)
+		{
+			if (line.name == newLineName) {
+				this.line = line;
+			}
+		}
+	}
+	
     public void ToggleCanDraw(bool Boel)
     {
         canDraw = Boel;

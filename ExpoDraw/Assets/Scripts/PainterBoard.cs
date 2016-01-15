@@ -9,8 +9,7 @@ public class PainterBoard : MonoBehaviour {
 
 	public GameObject prefabButton;
 	public RectTransform ParentPanel;
-	public GameObject MenuButton1;
-	public GameObject MenuButton2;
+
 	private DrawLinesTouch dlt;
 	private TouchScreenKeyboard keyboard;
 
@@ -63,7 +62,5 @@ public class PainterBoard : MonoBehaviour {
 		//dlt.setBrush (buttonNo);
 	}
 
-	void MenuButton2Click(){
-		
-	}
+
 }
