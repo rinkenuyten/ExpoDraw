@@ -26,15 +26,15 @@ public class GameManager : MonoBehaviour {
     {
         //Adding eventhandler to the 'ready' button.
         //Game manager
-//        if (Application.loadedLevelName == "Workspace_Yamil")
-//        {
-//            /GameObject GUIManager = GameObject.Find("UIManager").gameObject;
-//            NavigateGUI navGUI = GUIManager.GetComponent<NavigateGUI>();
-//            //The button
-//            GameObject buttonObj = GameObject.Find("ReadyButton").gameObject;
-//            Button button = buttonObj.GetComponent<Button>();
-//            button.onClick.AddListener(() => Application.LoadLevel("Workspace_Kees"));
-//        }        
+        if (Application.loadedLevelName == "Workspace_Yamil")
+        {
+            GameObject GUIManager = GameObject.Find("UIManager").gameObject;
+            NavigateGUI navGUI = GUIManager.GetComponent<NavigateGUI>();
+            //The button
+            GameObject buttonObj = GameObject.Find("ReadyButton").gameObject;
+            Button button = buttonObj.GetComponent<Button>();
+            button.onClick.AddListener(() => Application.LoadLevel("Workspace_Kees"));
+        }        
 
         Opdrachten = new List<Opdracht>();
         paintings = new List<Painting>();
