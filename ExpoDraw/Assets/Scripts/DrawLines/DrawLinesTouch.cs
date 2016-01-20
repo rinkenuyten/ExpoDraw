@@ -35,19 +35,13 @@ public class DrawLinesTouch : MonoBehaviour {
 	private string activeColor;
 	private string activeBrush;
 
-
-	
-
 	public void Start ()
     {
         LineNr = 0;
         useLineWidth = lineWidth;
 		
-		
 		sqrMinPixelMove = minPixelMove*minPixelMove;
-	}
 
-	public void Update (){
         if (GameObject.Find("VectorCanvas"))
         {
             Canvas DrawCanvas = GameObject.Find("VectorCanvas").GetComponent<Canvas>();
@@ -55,6 +49,19 @@ public class DrawLinesTouch : MonoBehaviour {
             DrawCanvas.worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
             DrawCanvas.pixelPerfect = true;
         }
+	}
+
+	public void Update (){
+
+
+            /*
+            GameObject newGO = new GameObject("myTextGO");
+            ngo.transform.SetParent(DrawCanvas.transform);
+
+            Text myText = ngo.AddComponent<Text>();
+            myText.text = "Ta-dah!";
+             * */
+        
 
 		if (Input.touchCount > 0) {
 			touch = Input.GetTouch(0);
