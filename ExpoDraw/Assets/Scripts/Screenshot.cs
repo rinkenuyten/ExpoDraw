@@ -38,7 +38,7 @@ public class Screenshot : MonoBehaviour
 
         while (buttonIndex <= gallery.transform.childCount - 2)
         {
-            texture = LoadPNG(customPath + "/Gallery/button" + buttonIndex + ".png");
+            texture = LoadPNG(customPath + "Gallery/button" + buttonIndex + ".png");
 
             Debug.Log(texture);
 
@@ -78,7 +78,7 @@ public class Screenshot : MonoBehaviour
 	{
         if (firstScreenshot)
         {
-            DirectoryInfo di = new DirectoryInfo(Environment.CurrentDirectory);
+            DirectoryInfo di = new DirectoryInfo(Application.persistentDataPath);
             FileInfo[] fi = di.GetFiles();
             foreach (FileInfo fiTemp in fi)
             {
@@ -94,7 +94,7 @@ public class Screenshot : MonoBehaviour
         Application.CaptureScreenshot(path, resolution);
         index++;
         Debug.Log("Take Screenshot" + index);
-		Debug.LogWarning("Screenshot saved: " + customPath + " --- " + imageName + index);
+		Debug.LogWarning("Screenshot saved: " + customPath + "-- - " + imageName + index);
     }
 
 
@@ -144,7 +144,7 @@ public class Screenshot : MonoBehaviour
     public void SaveGallery()
     {
         int buttonIndex = 1;
-        Debug.Log(customPath + "/Gallery/button" + buttonIndex + ".png");
+        Debug.Log(customPath + "Gallery/button" + buttonIndex + ".png");
         while (buttonIndex <= gallery.transform.childCount - 2)
         {
             Sprite s = gallery.transform.GetChild(buttonIndex).GetComponent<Image>().sprite;
@@ -157,7 +157,7 @@ public class Screenshot : MonoBehaviour
             croppedTexture.Apply();
 
             Byte[] t = croppedTexture.EncodeToPNG();
-            File.WriteAllBytes(customPath + "/Gallery/button" + buttonIndex + ".png", t);
+            File.WriteAllBytes(customPath + "Gallery/button" + buttonIndex + ".png", t);
             buttonIndex++;
         }
     }
