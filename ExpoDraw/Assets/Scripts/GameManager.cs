@@ -26,15 +26,33 @@ public class GameManager : MonoBehaviour {
     {
         //Adding eventhandler to the 'ready' button.
         //Game manager
-        //if (Application.loadedLevelName == "Workspace_Yamil")
-        //{
-        //    GameObject GUIManager = GameObject.Find("UIManager").gameObject;
-        //    NavigateGUI navGUI = GUIManager.GetComponent<NavigateGUI>();
-        //    //The button
-        //    GameObject buttonObj = GameObject.Find("ReadyButton").gameObject;
-        //    Button button = buttonObj.GetComponent<Button>();
-        //    button.onClick.AddListener(() => Application.LoadLevel("Workspace_Kees"));
-        //}        
+        if (Application.loadedLevelName == "Workspace_Yamil")
+        {
+            GameObject GUIManager = GameObject.Find("UIManager").gameObject;
+            NavigateGUI navGUI = GUIManager.GetComponent<NavigateGUI>();
+            Canvas rightCanvas = null;
+            foreach (Canvas c in navGUI.Canvases) {
+                if (c.name == "AreYouSurePopup")
+                {
+                    rightCanvas = c;
+                }
+            }
+            GameObject canvas = GameObject.Find("Canvas").gameObject;
+            //The done button
+            GameObject buttonObj = GameObject.Find("Canvas/canvas options/canvas done/done").gameObject;
+            Button button = buttonObj.GetComponent<Button>();
+            button.onClick.AddListener(() => canvas.SetActive(false));
+            button.onClick.AddListener(() => navGUI.MoveTo(rightCanvas));
+            //The back button
+            buttonObj = GameObject.Find("Canvas/canvas options/canvas done/back").gameObject;
+            button = buttonObj.GetComponent<Button>();
+            button.onClick.AddListener(() => canvas.SetActive(false));
+            button.onClick.AddListener(() => navGUI.MoveBack());
+            //The no button form the 'areyousurepopup'
+            buttonObj = GameObject.Find("AreYouSurePopup/btnNo").gameObject;
+            button = buttonObj.GetComponent<Button>();
+            button.onClick.AddListener(() => canvas.SetActive(true));
+        }        
 
         Opdrachten = new List<Opdracht>();
         paintings = new List<Painting>();

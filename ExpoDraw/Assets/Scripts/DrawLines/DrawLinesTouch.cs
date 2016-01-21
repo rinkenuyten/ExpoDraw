@@ -35,19 +35,13 @@ public class DrawLinesTouch : MonoBehaviour {
 	private string activeColor;
 	private string activeBrush;
 
-
-	
-
 	public void Start ()
     {
         LineNr = 0;
         useLineWidth = lineWidth;
 		
-		
 		sqrMinPixelMove = minPixelMove*minPixelMove;
-	}
 
-	public void Update (){
         if (GameObject.Find("VectorCanvas"))
         {
             Canvas DrawCanvas = GameObject.Find("VectorCanvas").GetComponent<Canvas>();
@@ -55,6 +49,19 @@ public class DrawLinesTouch : MonoBehaviour {
             DrawCanvas.worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
             DrawCanvas.pixelPerfect = true;
         }
+	}
+
+	public void Update (){
+
+
+            /*
+            GameObject newGO = new GameObject("myTextGO");
+            ngo.transform.SetParent(DrawCanvas.transform);
+
+            Text myText = ngo.AddComponent<Text>();
+            myText.text = "Ta-dah!";
+             * */
+        
 
 		if (Input.touchCount > 0) {
 			touch = Input.GetTouch(0);
@@ -85,9 +92,10 @@ public class DrawLinesTouch : MonoBehaviour {
             {
                 foreach (Color color in opdracht.Colors)
                 {
-					
-					VectorLine tempLine = new VectorLine(size + "," + color.ToString() + "," + brush.name, new List<Vector2>(), brush, size, 
+                    VectorLine tempLine = new VectorLine(size + "," + color.ToString() + "," + brush.name, new List<Vector2>(), brush, size, 
                         LineType.Continuous, Joins.Weld);
+                    GameObject tempooo = GameObject.Find(tempLine.name);
+                    tempooo.AddComponent(typeof(NetworkView));
 					//tempLine.SetCanvas (canvas);
                     tempLine.color = color;
                     tempLine.endPointsUpdate = 1;
