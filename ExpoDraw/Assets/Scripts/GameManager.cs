@@ -38,13 +38,20 @@ public class GameManager : MonoBehaviour {
                 }
             }
             GameObject canvas = GameObject.Find("Canvas").gameObject;
-            //The button
+            //The done button
             GameObject buttonObj = GameObject.Find("Canvas/canvas options/canvas done/done").gameObject;
             Button button = buttonObj.GetComponent<Button>();
-            //button.onClick.AddListener(() => navGUI.SpecifyCanvas(rightCanvas));
             button.onClick.AddListener(() => canvas.SetActive(false));
             button.onClick.AddListener(() => navGUI.MoveTo(rightCanvas));
-            //button.onClick.AddListener(() => navGUI.doneDrawing());
+            //The back button
+            buttonObj = GameObject.Find("Canvas/canvas options/canvas done/back").gameObject;
+            button = buttonObj.GetComponent<Button>();
+            button.onClick.AddListener(() => canvas.SetActive(false));
+            button.onClick.AddListener(() => navGUI.MoveBack());
+            //The no button form the 'areyousurepopup'
+            buttonObj = GameObject.Find("AreYouSurePopup/btnNo").gameObject;
+            button = buttonObj.GetComponent<Button>();
+            button.onClick.AddListener(() => canvas.SetActive(true));
         }        
 
         Opdrachten = new List<Opdracht>();
