@@ -37,12 +37,17 @@ public class GameManager : MonoBehaviour {
                     rightCanvas = c;
                 }
             }
+            //Screenshotmanager
+            GameObject screenshotManger = GameObject.Find("ScreenShotManager").gameObject;
+            ScreenshotOnly ssManager = screenshotManger.GetComponent<ScreenshotOnly>();
+            //CurrentCanvas
             GameObject canvas = GameObject.Find("Canvas").gameObject;
             //The done button
             GameObject buttonObj = GameObject.Find("Canvas/canvas options/canvas done/done").gameObject;
             Button button = buttonObj.GetComponent<Button>();
-            button.onClick.AddListener(() => canvas.SetActive(false));
-            button.onClick.AddListener(() => navGUI.MoveTo(rightCanvas));
+            button.onClick.AddListener(() => ssManager.MakeScreenshot());
+            /*button.onClick.AddListener(() => canvas.SetActive(false));
+            button.onClick.AddListener(() => navGUI.MoveTo(rightCanvas));*/
             //The back button
             buttonObj = GameObject.Find("Canvas/canvas options/canvas done/back").gameObject;
             button = buttonObj.GetComponent<Button>();
@@ -52,7 +57,19 @@ public class GameManager : MonoBehaviour {
             buttonObj = GameObject.Find("AreYouSurePopup/btnNo").gameObject;
             button = buttonObj.GetComponent<Button>();
             button.onClick.AddListener(() => canvas.SetActive(true));
-        }        
+        }
+        if (Application.loadedLevelName == "Workspace_Laura")
+        {
+            GameObject GUIManager = GameObject.Find("UIManager").gameObject;
+            NavigateGUI navGUI = GUIManager.GetComponent<NavigateGUI>();
+            //
+            GameObject canvas = GameObject.Find("Gallery").gameObject;
+            //The back button
+            GameObject buttonObj = GameObject.Find("Gallery/Done").gameObject;
+            Button button = buttonObj.GetComponent<Button>();
+            button.onClick.AddListener(() => canvas.SetActive(false));
+            button.onClick.AddListener(() => navGUI.ReturnMainMenu());
+        }
 
         Opdrachten = new List<Opdracht>();
         paintings = new List<Painting>();
