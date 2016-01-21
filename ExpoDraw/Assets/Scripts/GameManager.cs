@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
             NavigateGUI navGUI = GUIManager.GetComponent<NavigateGUI>();
             Canvas rightCanvas = null;
             foreach (Canvas c in navGUI.Canvases) {
-                if (c.name == "AreYouSurePopup")
+                if (c.name == "ResultCanvas")
                 {
                     rightCanvas = c;
                 }
@@ -169,65 +169,6 @@ public class GameManager : MonoBehaviour {
         //--------------------------------------------------------------------------------------------------------------------------------------------
 		// new painting
 
-		Opdrachten.Clear ();
-
-		newInts = new List<int>();
-		newBrush = new List<Texture> ();
-		newColor = new List<Color> ();
-
-        newInts.Add(6 + 5);
-        newInts.Add(9 + 5);
-
-		newBrush.Add(texture1);
-		newBrush.Add(texture2);
-
-		newColor.Add(Color.yellow);
-		newColor.Add(Color.blue);
-		newColor.Add(Color.red);
-		newColor.Add(Color.white);
-
-		Opdrachten.Add(new Opdracht("Tekenen op inspiratie", "De inspiratie van dit schilderij kwam van het stratenpatroon in New York en van de swingende jazzmuziek van die tijd. Teken jouw variant met de verkregen inspiratie.", newInts, newBrush, newColor));
-
-		newInts = new List<int>();
-		newBrush = new List<Texture> ();
-		newColor = new List<Color> ();
-
-        newInts.Add(4 + 5);
-        newInts.Add(6 + 5);
-        newInts.Add(9 + 5);
-
-		newBrush.Add(texture1);
-		newBrush.Add(texture2);
-		newBrush.Add(texture3);
-		newBrush.Add(texture4);
-		newBrush.Add(texture5);
-
-		newColor.Add(Color.yellow);
-
-		Opdrachten.Add(new Opdracht("Tekenen met één kleur", "Teken door middel van 1 kleur dit schilderij na.", newInts, newBrush, newColor));
-
-		newInts = new List<int>();
-		newBrush = new List<Texture> ();
-		newColor = new List<Color> ();
-
-        newInts.Add(4 + 5);
-        newInts.Add(6 + 5);
-        newInts.Add(9 + 5);
-
-		newBrush.Add(texture1);
-
-		newColor.Add(Color.yellow);
-		newColor.Add(Color.red);
-		newColor.Add(Color.blue);
-
-		Opdrachten.Add(new Opdracht("Wat zie jij?", "Mondriaan is een schilder die vooral abstracte kunstwerken maakt. Ook dit is weer een abstract kunstwerk. Teken wat jij ziet in dit kunstwerk met de kleuren die ook in dit kunstwerk verwerkt zijn.", newInts, newBrush, newColor));
-
-		Painting boogie = new Painting ("Broadway Boogie Woogie ", Opdrachten);
-		paintings.Add(boogie);
-
-
-        //--------------------------------------------------------------------------------------------------------------------------------------------
-		// new painting
 
 		Opdrachten.Clear ();
 
@@ -288,6 +229,66 @@ public class GameManager : MonoBehaviour {
 
 		Painting sterrennacht = new Painting ("Sterrennacht", Opdrachten);
 		paintings.Add(sterrennacht);
+
+        //--------------------------------------------------------------------------------------------------------------------------------------------
+        // new painting
+
+
+        Opdrachten.Clear();
+
+        newInts = new List<int>();
+        newBrush = new List<Texture>();
+        newColor = new List<Color>();
+
+        newInts.Add(6 + 5);
+        newInts.Add(9 + 5);
+
+        newBrush.Add(texture1);
+        newBrush.Add(texture2);
+
+        newColor.Add(Color.yellow);
+        newColor.Add(Color.blue);
+        newColor.Add(Color.red);
+        newColor.Add(Color.white);
+
+        Opdrachten.Add(new Opdracht("Tekenen op inspiratie", "De inspiratie van dit schilderij kwam van het stratenpatroon in New York en van de swingende jazzmuziek van die tijd. Teken jouw variant met de verkregen inspiratie.", newInts, newBrush, newColor));
+
+        newInts = new List<int>();
+        newBrush = new List<Texture>();
+        newColor = new List<Color>();
+
+        newInts.Add(4 + 5);
+        newInts.Add(6 + 5);
+        newInts.Add(9 + 5);
+
+        newBrush.Add(texture1);
+        newBrush.Add(texture2);
+        newBrush.Add(texture3);
+        newBrush.Add(texture4);
+        newBrush.Add(texture5);
+
+        newColor.Add(Color.yellow);
+
+        Opdrachten.Add(new Opdracht("Tekenen met één kleur", "Teken door middel van 1 kleur dit schilderij na.", newInts, newBrush, newColor));
+
+        newInts = new List<int>();
+        newBrush = new List<Texture>();
+        newColor = new List<Color>();
+
+        newInts.Add(4 + 5);
+        newInts.Add(6 + 5);
+        newInts.Add(9 + 5);
+
+        newBrush.Add(texture1);
+
+        newColor.Add(Color.yellow);
+        newColor.Add(Color.red);
+        newColor.Add(Color.blue);
+
+        Opdrachten.Add(new Opdracht("Wat zie jij?", "Mondriaan is een schilder die vooral abstracte kunstwerken maakt. Ook dit is weer een abstract kunstwerk. Teken wat jij ziet in dit kunstwerk met de kleuren die ook in dit kunstwerk verwerkt zijn.", newInts, newBrush, newColor));
+
+        Painting boogie = new Painting("Broadway Boogie Woogie", Opdrachten);
+        paintings.Add(boogie);
 
         SetOpdracht(Opdrachten[0]);
 	}

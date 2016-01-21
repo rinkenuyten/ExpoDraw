@@ -167,7 +167,6 @@ public class NavigateGUI : MonoBehaviour {
 	        }
 
             Canvas toMoveAndRefresh = new Canvas();
-            //Displaying all found tasks
             foreach(Canvas c in Canvases) 
             {
                 if (c.name == "DescriptionCanvas")
@@ -176,6 +175,7 @@ public class NavigateGUI : MonoBehaviour {
                 }
             }
             int yPos = 200;
+            //Displaying all found tasks
             foreach (Opdracht o in tasks)
             {
                 GameObject objTask = (GameObject)Instantiate(taskButton);
