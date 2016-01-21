@@ -13,17 +13,21 @@ public class Screenshot : MonoBehaviour
     public string customPath = ""; // leave blank for project file location
     public bool resetIndex = false;
     public GameObject gallery;
-    public GameObject viewImages;
+	public GameObject viewImages;
+	public GameObject loadingCanvas;
+    public RectTransform ParentCanvas;
 
-    private int index = 1;
-    private int indexToGet = 1;
+    public int index = 1;
+    public int indexToGet = 1;
     private int pressedButton;
-    Texture2D text;
+    public Texture2D texture;
+    public bool loading = false;
 
     void Start()
     {
-        viewImages.SetActive(false);
-        text = new Texture2D(10, 10);
+	    viewImages.SetActive(false);
+	    loadingCanvas.SetActive(false);
+        texture = new Texture2D(10, 10);
     }
 
     void Awake()
@@ -40,68 +44,42 @@ public class Screenshot : MonoBehaviour
     }
 
     public void MakeScreenshot()
-    {
+	{
         string path = customPath + imageName + index + ".png";
         Application.CaptureScreenshot(path, resolution);
         index++;
+        gallery.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = customPath;
         Debug.Log("Take Screenshot" + index);
-        Debug.LogWarning("Screenshot saved: " + customPath + " --- " + imageName + index);
+		Debug.LogWarning("Screenshot saved: " + customPath + " --- " + imageName + index);
     }
 
 
     public void GetPictures(int button)
-    {
-        pressedButton = button;
-        int allImagesIndex = 0;
-        indexToGet = 1;
-        while (indexToGet < index)
-        {
-            text = LoadPNG(customPath + imageName + indexToGet + ".png");
-
-            if (text != null)
-            {
-                Rect rect = new Rect(0, 0, text.width, text.height);
-                Debug.Log(rect);
-                Vector2 pivot = new Vector2(text.width / 2, text.height / 2);
-                viewImages.transform.GetChild(allImagesIndex).GetComponent<Image>().sprite = Sprite.Create(text, rect, pivot);
-            }
-            indexToGet++;
-            if (allImagesIndex < viewImages.transform.GetChildCount())
-            {
-                allImagesIndex++;
-            }
-        }
-
-        gallery.SetActive(false);
-        viewImages.SetActive(true);
+	{
+		pressedButton = button;
+        loading = true;
+        Debug.Log(loading);
+        loadingCanvas.SetActive(true);
+		gallery.SetActive(false);
     }
 
     public void AddToGallery(int childIndex)
     {
 
         gallery.transform.GetChild(pressedButton).GetComponent<Image>().sprite = viewImages.transform.GetChild(childIndex).GetComponent<Image>().sprite;
-        gallery.transform.GetChild(pressedButton).GetChild(0).GetComponent<Text>().text = "";
+        if (viewImages.transform.GetChild(childIndex).GetChild(0).GetComponent<Text>().text != "No art available")
+        {
+            gallery.transform.GetChild(pressedButton).GetChild(0).GetComponent<Text>().text = "";
+        }
 
         gallery.SetActive(true);
         viewImages.SetActive(false);
     }
 
-    public static Texture2D LoadPNG(string filePath)
+    public void Back()
     {
-
-        Texture2D tex = null;
-        byte[] fileData;
-
-        Debug.Log("loading");
-
-        if (File.Exists(filePath))
-        {
-            fileData = File.ReadAllBytes(filePath);
-            tex = new Texture2D(2, 2);
-            tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
-            Debug.Log(tex);
-        }
-        return tex;
+        gallery.SetActive(true);
+        viewImages.SetActive(false);
     }
 
 

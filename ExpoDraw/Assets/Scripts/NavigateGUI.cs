@@ -243,7 +243,28 @@ public class NavigateGUI : MonoBehaviour {
             {
                 button.gameObject.SetActive(false);
             }
-        }       
+        }
+        else if (currentCanvas.name == "AreYouSurePopup")
+        {
+            Application.UnloadLevel("Workspace_Yamil");
+        }
+    }
+
+    /// <summary>
+    /// Setting all canvases rigth after com
+    /// </summary>
+    public void doneDrawing()
+    {
+        GameObject g = GameObject.Find("MainMenuCanvas").gameObject;
+        Canvas c = g.GetComponent<Canvas>();
+        lastScreen[0] = c;
+        g = GameObject.Find("GameModeCanvas").gameObject;
+        c = g.GetComponent<Canvas>();
+        lastScreen[1] = c;
+        lastScreen[2] = null;
+        lastScreen[2] = null;
+        lastScreen[2] = null;
+        
     }
 
     /// <summary>
