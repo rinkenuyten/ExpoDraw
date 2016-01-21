@@ -82,10 +82,10 @@ public class NetworkManager : MonoBehaviour {
             RefreshHostList(); 
             if (hostList != null)
             {
-                if (hostList.Length < 0)
+                if (hostList.Length > 0)
                 {
                     Debug.Log(hostList.Length);
-                    //JoinServer(hostList[0]);
+                    
                 }
             }
         }

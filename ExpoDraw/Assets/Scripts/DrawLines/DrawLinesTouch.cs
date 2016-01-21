@@ -92,9 +92,10 @@ public class DrawLinesTouch : MonoBehaviour {
             {
                 foreach (Color color in opdracht.Colors)
                 {
-					
-					VectorLine tempLine = new VectorLine(size + "," + color.ToString() + "," + brush.name, new List<Vector2>(), brush, size, 
+                    VectorLine tempLine = new VectorLine(size + "," + color.ToString() + "," + brush.name, new List<Vector2>(), brush, size, 
                         LineType.Continuous, Joins.Weld);
+                    GameObject tempooo = GameObject.Find(tempLine.name);
+                    tempooo.AddComponent(typeof(NetworkView));
 					//tempLine.SetCanvas (canvas);
                     tempLine.color = color;
                     tempLine.endPointsUpdate = 1;
