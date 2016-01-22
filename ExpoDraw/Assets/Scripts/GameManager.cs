@@ -286,7 +286,7 @@ public class GameManager : MonoBehaviour {
 
         newColor.Add(Color.yellow);
 
-        Opdrachten.Add(new Opdracht("Tekenen met één kleur", "Teken door middel van 1 kleur dit schilderij na.", newInts, newBrush, newColor));
+        Opdrachten.Add(new Opdracht("Tekenen met één kleur", "Mondriaan tekende met primaire kleuren en abstracte vormen. Maak een eigen sfeerimpressie waarbij iedere kleur een andere richting weergeeft.(Horizontaal/Verticaal/Diagonaal)", newInts, newBrush, newColor));
 
         newInts = new List<int>();
         newBrush = new List<Texture>();
