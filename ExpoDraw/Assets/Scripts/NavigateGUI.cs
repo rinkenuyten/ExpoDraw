@@ -60,11 +60,18 @@ public class NavigateGUI : MonoBehaviour {
             //Enable and disable visibility for all canvases
             if (c.name == canvas.name)
             {
+                //Navigate to Drawingscreen
                 if (c.name == "DrawingCanvas")
                 {
                     Application.LoadLevel("Workspace_Yamil");
                 }
-                c.enabled = true;          
+                c.enabled = true;
+                //Navigate to Drawingscreen
+                if (c.name == "ResultCanvas")
+                {
+                    Application.LoadLevel("Workspace_Laura");
+                }
+                c.enabled = true;  
             }
             else
             {
@@ -167,7 +174,6 @@ public class NavigateGUI : MonoBehaviour {
 	        }
 
             Canvas toMoveAndRefresh = new Canvas();
-            //Displaying all found tasks
             foreach(Canvas c in Canvases) 
             {
                 if (c.name == "DescriptionCanvas")
@@ -176,6 +182,7 @@ public class NavigateGUI : MonoBehaviour {
                 }
             }
             int yPos = 200;
+            //Displaying all found tasks
             foreach (Opdracht o in tasks)
             {
                 GameObject objTask = (GameObject)Instantiate(taskButton);
@@ -243,10 +250,6 @@ public class NavigateGUI : MonoBehaviour {
             {
                 button.gameObject.SetActive(false);
             }
-        }
-        else if (currentCanvas.name == "AreYouSurePopup")
-        {
-            Application.UnloadLevel("Workspace_Yamil");
         }
     }
 

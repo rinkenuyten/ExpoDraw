@@ -61,27 +61,31 @@ public class DrawLinesTouch : MonoBehaviour {
             Text myText = ngo.AddComponent<Text>();
             myText.text = "Ta-dah!";
              * */
-        
 
-		if (Input.touchCount > 0) {
-			touch = Input.GetTouch(0);
-			if (touch.phase == TouchPhase.Began) 
+        if (canDraw)
+        {
+            if (Input.touchCount > 0)
             {
-				line.Draw();
-				previousPosition = touch.position;
-				line.points2.Add (touch.position);
-				canDraw = true;
-			}
-			else if (touch.phase == TouchPhase.Moved && (touch.position - previousPosition).sqrMagnitude > sqrMinPixelMove && canDraw) 
-            {
-				previousPosition = touch.position;
-				line.points2.Add (touch.position);
-				if (line.points2.Count >= maxPoints) {
-					canDraw = false;
-				}
-				line.Draw();
-			}
-		}
+                touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began)
+                {
+                    line.Draw();
+                    previousPosition = touch.position;
+                    line.points2.Add(touch.position);
+                    canDraw = true;
+                }
+                else if (touch.phase == TouchPhase.Moved && (touch.position - previousPosition).sqrMagnitude > sqrMinPixelMove && canDraw)
+                {
+                    previousPosition = touch.position;
+                    line.points2.Add(touch.position);
+                    if (line.points2.Count >= maxPoints)
+                    {
+                        canDraw = false;
+                    }
+                    line.Draw();
+                }
+            }
+        }	
 	}
 
     public void StartOpdracht(Opdracht opdracht)
