@@ -268,7 +268,7 @@ public class GameManager : MonoBehaviour {
         newColor.Add(Color.red);
         newColor.Add(Color.white);
 
-        Opdrachten.Add(new Opdracht("Tekenen op inspiratie", "De inspiratie van dit schilderij kwam van het stratenpatroon in New York en van de swingende jazzmuziek van die tijd. Teken jouw variant met de verkregen inspiratie.", newInts, newBrush, newColor));
+        Opdrachten.Add(new Opdracht("Tekenen op inspiratie", "De inspiratie van dit schilderij kwam van het stratenpatroon in New York en van de swingende jazzmuziek van die tijd. Teken jouw stratenpatroon waar je woont met de verkregen inspiratie.", newInts, newBrush, newColor));
 
         newInts = new List<int>();
         newBrush = new List<Texture>();
@@ -302,7 +302,7 @@ public class GameManager : MonoBehaviour {
         newColor.Add(Color.red);
         newColor.Add(Color.blue);
 
-        Opdrachten.Add(new Opdracht("Wat zie jij?", "Mondriaan is een schilder die vooral abstracte kunstwerken maakt. Ook dit is weer een abstract kunstwerk. Teken wat jij ziet in dit kunstwerk met de kleuren die ook in dit kunstwerk verwerkt zijn.", newInts, newBrush, newColor));
+        Opdrachten.Add(new Opdracht("Wat zie jij?", "Mondriaan is een schilder die vooral abstracte kunstwerken maakt. Ook dit is weer een abstract kunstwerk. Teken je hobby met de kleuren die ook in dit kunstwerk verwerkt zijn.", newInts, newBrush, newColor));
 
         Painting boogie = new Painting("Broadway Boogie Woogie", Opdrachten);
         paintings.Add(boogie);
