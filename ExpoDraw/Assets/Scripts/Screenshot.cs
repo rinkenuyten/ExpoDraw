@@ -36,7 +36,7 @@ public class Screenshot : MonoBehaviour
         }
         int buttonIndex = 1;
 
-        while (buttonIndex <= gallery.transform.childCount - 2)
+	    while (buttonIndex <= gallery.transform.childCount - 1)
         {
             texture = LoadPNG(customPath + "Gallery/button" + buttonIndex + ".png");
 
@@ -145,7 +145,7 @@ public class Screenshot : MonoBehaviour
     {
         int buttonIndex = 1;
         Debug.Log(customPath + "Gallery/button" + buttonIndex + ".png");
-        while (buttonIndex <= gallery.transform.childCount - 2)
+	    while (buttonIndex <= gallery.transform.childCount - 1)
         {
             Sprite s = gallery.transform.GetChild(buttonIndex).GetComponent<Image>().sprite;
             Texture2D croppedTexture = new Texture2D((int)s.rect.width, (int)s.rect.height);
