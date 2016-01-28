@@ -65,11 +65,15 @@ public class NavigateGUI : MonoBehaviour {
                 {
                     Application.LoadLevel("Workspace_Yamil");
                 }
-                c.enabled = true;
                 //Navigate to Drawingscreen
                 if (c.name == "ResultCanvas")
                 {
                     Application.LoadLevel("Workspace_Laura");
+                }
+                //Navigate to Drawingscreen
+                if (c.name == "WaitingRoomCanvas")
+                {
+                    Application.LoadLevel("Workspace_Rinke");
                 }
                 c.enabled = true;  
             }

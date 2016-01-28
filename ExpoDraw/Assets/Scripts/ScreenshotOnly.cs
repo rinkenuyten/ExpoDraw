@@ -59,7 +59,7 @@ public class ScreenshotOnly : MonoBehaviour {
         }
         navGUI.MoveTo(rightCanvas);
 
-        GameObject UIScriptManager = GameObject.Find("UIScript").gameObject;
+        GameObject UIScriptManager = GameObject.Find("UIScripts").gameObject;
         UIScript uiScript = UIScriptManager.GetComponent<UIScript>();
         uiScript.OnClearButtonClick();
 

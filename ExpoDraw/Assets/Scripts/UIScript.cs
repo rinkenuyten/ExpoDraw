@@ -79,6 +79,11 @@ public class UIScript : MonoBehaviour {
 		AccessCamera.SendMessage("setSize", size);
 	}
 
+    public void ShowInformationTask()
+    {
+
+    }
+
 	// Use this for initialization
 	void Start () {
 	
