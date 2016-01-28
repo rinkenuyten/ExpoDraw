@@ -62,8 +62,11 @@ public class DrawLinesTouch : MonoBehaviour {
             myText.text = "Ta-dah!";
              * */
 
+<<<<<<< HEAD
         if (canDraw)
         {
+=======
+>>>>>>> newbrnach
             if (Input.touchCount > 0)
             {
                 touch = Input.GetTouch(0);
@@ -73,6 +76,10 @@ public class DrawLinesTouch : MonoBehaviour {
                     previousPosition = touch.position;
                     line.points2.Add(touch.position);
                     canDraw = true;
+<<<<<<< HEAD
+=======
+                    GetComponent<NetworkView>().RPC("TouchBegan", RPCMode.All, new object[] { new Vector3(touch.position.x, touch.position.y) });
+>>>>>>> newbrnach
                 }
                 else if (touch.phase == TouchPhase.Moved && (touch.position - previousPosition).sqrMagnitude > sqrMinPixelMove && canDraw)
                 {
@@ -83,10 +90,60 @@ public class DrawLinesTouch : MonoBehaviour {
                         canDraw = false;
                     }
                     line.Draw();
+<<<<<<< HEAD
                 }
             }
         }	
+=======
+                    GetComponent<NetworkView>().RPC("TouchEnd", RPCMode.All, new object[] { new Vector3(touch.position.x, touch.position.y) });
+                }
+            }
+
+>>>>>>> newbrnach
 	}
+
+    [RPC]
+    public void TouchBegan(Vector3 pos)
+    {
+        line.Draw();
+        previousPosition = new Vector2(pos.x, pos.y);
+        line.points2.Add(new Vector2(pos.x, pos.y));
+        canDraw = true;
+    }
+
+    [RPC]
+    public void ClearOtherScreen()
+    {
+        foreach (VectorLine line in Lines)
+        {
+            line.points2.Clear();
+            line.Draw();
+        }
+    }
+
+    [RPC]
+    public void TouchEnd(Vector3 pos)
+    {
+        previousPosition = new Vector2(pos.x, pos.y);
+        line.points2.Add(new Vector2(pos.x, pos.y));
+        if (line.points2.Count >= maxPoints)
+        {
+            canDraw = false;
+        }
+        line.Draw();
+    }
+
+    [RPC]
+    public void NewColor(string name)
+    {
+        foreach (VectorLine line in Lines)
+        {
+            if (line.name == name)
+            {
+                this.line = line;
+            }
+        }
+    }
 
     public void StartOpdracht(Opdracht opdracht)
     {
@@ -98,8 +155,8 @@ public class DrawLinesTouch : MonoBehaviour {
                 {
                     VectorLine tempLine = new VectorLine(size + "," + color.ToString() + "," + brush.name, new List<Vector2>(), brush, size, 
                         LineType.Continuous, Joins.Weld);
-                    GameObject tempooo = GameObject.Find(tempLine.name);
-                    tempooo.AddComponent(typeof(NetworkView));
+
+
 					//tempLine.SetCanvas (canvas);
                     tempLine.color = color;
                     tempLine.endPointsUpdate = 1;
@@ -109,6 +166,7 @@ public class DrawLinesTouch : MonoBehaviour {
         }
         foreach(VectorLine linetest in Lines)
         {
+
             linetest.Draw();
         }
 
@@ -147,6 +205,7 @@ public class DrawLinesTouch : MonoBehaviour {
             line.points2.Clear();
             line.Draw();
         }
+        GetComponent<NetworkView>().RPC("ClearOtherScreen", RPCMode.All, null);
     }
 
     public void setColor(string colorname)
@@ -175,6 +234,7 @@ public class DrawLinesTouch : MonoBehaviour {
 				this.line = line;
 			}
 		}
+        GetComponent<NetworkView>().RPC("NewColor", RPCMode.All, new object[] { newLineName });
 	}
 	
     public void ToggleCanDraw(bool Boel)

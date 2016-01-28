@@ -19,24 +19,34 @@ public class NetworkManager : MonoBehaviour {
     void OnServerInitialized()
     {
         //SpawnPlayer();
-        Debug.Log("Add ur vectorlines to server, ur a host harry");
+        Debug.Log("ur a host harry");
     }
 
     void OnGUI()
     {
         if (!Network.isClient && !Network.isServer)
         {
+<<<<<<< HEAD
             if (GUI.Button(new Rect(0, 0, 130, 130), "Start Server"))
                 StartServer();
 
             if (GUI.Button(new Rect(135, 0, 130, 130), "Refresh Hosts"))
                 RefreshHostList();
 
+=======
+            if (GUI.Button(new Rect(0, 0, 160, 160), "Start Server"))
+                StartServer();
+
+>>>>>>> newbrnach
             if (hostList != null)
             {
                 for (int i = 0; i < hostList.Length; i++)
                 {
+<<<<<<< HEAD
                     if (GUI.Button(new Rect(280, 0 + (30 * i), 130, 130), hostList[i].gameName))
+=======
+                    if (GUI.Button(new Rect(170, 0 + (30 * i), 170, 170), hostList[i].gameName))
+>>>>>>> newbrnach
                         JoinServer(hostList[i]);
                 }
             }
@@ -63,7 +73,7 @@ public class NetworkManager : MonoBehaviour {
     void OnConnectedToServer()
     {
         //SpawnPlayer();
-        Debug.Log("Add ur vectorlines to server, ur a client harry");
+        Debug.Log("ur a client harry");
     }
 
 	// Use this for initialization
