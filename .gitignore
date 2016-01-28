@@ -1,20 +1,4 @@
-Skip to content
-This repository  
-Search
-Pull requests
-Issues
-Gist
- @MultimedYam
- Unwatch 2
-  Star 0
-  Fork 0 MultimedYam/UnityTestository
- Code  Issues 0  Pull requests 0  Wiki  Pulse  Graphs  Settings
-Branch: master Find file Copy pathUnityTestository/.gitignore
-602ccc6  2 hours ago
-@MultimedYam MultimedYam Update .gitignore
-1 contributor
-RawBlameHistory     77 lines (63 sloc)  1.1 KB
-# Windows image file caches
+ Windows image file caches
 Thumbs.db
 ehthumbs.db
 
