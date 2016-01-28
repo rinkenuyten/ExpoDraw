@@ -11,7 +11,7 @@ public class Screenshot : MonoBehaviour
     public float moveSpeed = 1;
     public int resolution = 3; // 1= default, 2= 2x default, etc.
     public string imageName = "Screenshot_";
-	public string customPath = ""; // leave blank for project file location
+	public string customPath; // leave blank for project file location
 	public string mapName = "Buttons";
     public GameObject gallery;
 	public GameObject viewImages;
@@ -26,15 +26,9 @@ public class Screenshot : MonoBehaviour
 
     void Start()
     {
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            customPath = "/data/data/com.ExposureGames.expodraw/files";
-        }
-        else
-        {
-            customPath = "";
-        }
-        int buttonIndex = 1;
+	    customPath = Application.persistentDataPath;
+	    
+	    /*int buttonIndex = 1;
 
 	    while (buttonIndex <= gallery.transform.childCount - 1)
         {
@@ -51,7 +45,7 @@ public class Screenshot : MonoBehaviour
             }
 
             buttonIndex++;
-        }
+        }*/
         DontDestroyOnLoad(this);
         texture = new Texture2D(10, 10);
     }
@@ -76,25 +70,24 @@ public class Screenshot : MonoBehaviour
 
     public void MakeScreenshot()
 	{
-        if (firstScreenshot)
-        {
-            DirectoryInfo di = new DirectoryInfo(Application.persistentDataPath);
-            FileInfo[] fi = di.GetFiles();
-            foreach (FileInfo fiTemp in fi)
-            {
-                if (Path.GetExtension(customPath + fiTemp) == ".png")
-                {
-                    index++;
-                }
-            }
-            firstScreenshot = false;
-        }
-
-        string path = customPath + imageName + index + ".png";
-        Application.CaptureScreenshot(path, resolution);
-        index++;
-        Debug.Log("Take Screenshot" + index);
-		Debug.LogWarning("Screenshot saved: " + customPath + "-- - " + imageName + index);
+		if (firstScreenshot)
+		{
+			DirectoryInfo di = new DirectoryInfo(Application.persistentDataPath);
+			FileInfo[] fi = di.GetFiles();
+			foreach (FileInfo fiTemp in fi)
+			{
+				if (Path.GetExtension(customPath + fiTemp) == ".png")
+				{
+					index++;
+				}
+			}
+			firstScreenshot = false;
+		}
+		Application.CaptureScreenshot("Screenshot_" + index + ".png");
+		string path = System.IO.Path.Combine(Application.persistentDataPath, "Screenshot_" + index + ".png");
+		
+		if (File.Exists(Application.persistentDataPath)) { WWW loadedImage = new WWW("file://" + path); }
+		index++;
     }
 
 
@@ -143,7 +136,7 @@ public class Screenshot : MonoBehaviour
 
     public void SaveGallery()
     {
-        int buttonIndex = 1;
+	    /*int buttonIndex = 1;
         Debug.Log(customPath + "Gallery/button" + buttonIndex + ".png");
 	    while (buttonIndex <= gallery.transform.childCount - 1)
         {
@@ -159,7 +152,7 @@ public class Screenshot : MonoBehaviour
             Byte[] t = croppedTexture.EncodeToPNG();
             File.WriteAllBytes(customPath + "Gallery/button" + buttonIndex + ".png", t);
             buttonIndex++;
-        }
+        }*/
     }
 
     void OnApplicationQuit()
