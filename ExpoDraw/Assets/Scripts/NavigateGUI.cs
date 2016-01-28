@@ -165,6 +165,7 @@ public class NavigateGUI : MonoBehaviour {
             
             //Searching for the right painting
             List<Opdracht> tasks = new List<Opdracht>();
+            Debug.Log(gameManager.name);
             foreach (Painting p in gameManager.paintings)
 	        {
                 if (p.Name == paintingButton.name)
