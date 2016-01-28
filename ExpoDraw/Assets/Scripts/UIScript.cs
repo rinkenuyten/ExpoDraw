@@ -70,6 +70,15 @@ public class UIScript : MonoBehaviour {
 		
 		AccessCamera.SendMessage("setColor", activeColor.ToString());
 	}
+
+	public void SetActiveBrush (string brush){
+		AccessCamera.SendMessage("setBrush", brush);
+	}
+
+	public void SetActiveSize (int size){
+		AccessCamera.SendMessage("setSize", size);
+	}
+
 	// Use this for initialization
 	void Start () {
 	
