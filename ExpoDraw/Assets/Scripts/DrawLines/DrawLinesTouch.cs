@@ -51,22 +51,11 @@ public class DrawLinesTouch : MonoBehaviour {
         }
 	}
 
-	public void Update (){
+    public void Update()
+    {
 
-
-            /*
-            GameObject newGO = new GameObject("myTextGO");
-            ngo.transform.SetParent(DrawCanvas.transform);
-
-            Text myText = ngo.AddComponent<Text>();
-            myText.text = "Ta-dah!";
-             * */
-
-<<<<<<< HEAD
         if (canDraw)
         {
-=======
->>>>>>> newbrnach
             if (Input.touchCount > 0)
             {
                 touch = Input.GetTouch(0);
@@ -76,10 +65,7 @@ public class DrawLinesTouch : MonoBehaviour {
                     previousPosition = touch.position;
                     line.points2.Add(touch.position);
                     canDraw = true;
-<<<<<<< HEAD
-=======
                     GetComponent<NetworkView>().RPC("TouchBegan", RPCMode.All, new object[] { new Vector3(touch.position.x, touch.position.y) });
->>>>>>> newbrnach
                 }
                 else if (touch.phase == TouchPhase.Moved && (touch.position - previousPosition).sqrMagnitude > sqrMinPixelMove && canDraw)
                 {
@@ -90,17 +76,11 @@ public class DrawLinesTouch : MonoBehaviour {
                         canDraw = false;
                     }
                     line.Draw();
-<<<<<<< HEAD
-                }
-            }
-        }	
-=======
                     GetComponent<NetworkView>().RPC("TouchEnd", RPCMode.All, new object[] { new Vector3(touch.position.x, touch.position.y) });
                 }
             }
-
->>>>>>> newbrnach
-	}
+        }
+    }
 
     [RPC]
     public void TouchBegan(Vector3 pos)

@@ -26,27 +26,17 @@ public class NetworkManager : MonoBehaviour {
     {
         if (!Network.isClient && !Network.isServer)
         {
-<<<<<<< HEAD
             if (GUI.Button(new Rect(0, 0, 130, 130), "Start Server"))
                 StartServer();
 
             if (GUI.Button(new Rect(135, 0, 130, 130), "Refresh Hosts"))
                 RefreshHostList();
 
-=======
-            if (GUI.Button(new Rect(0, 0, 160, 160), "Start Server"))
-                StartServer();
-
->>>>>>> newbrnach
             if (hostList != null)
             {
                 for (int i = 0; i < hostList.Length; i++)
                 {
-<<<<<<< HEAD
-                    if (GUI.Button(new Rect(280, 0 + (30 * i), 130, 130), hostList[i].gameName))
-=======
                     if (GUI.Button(new Rect(170, 0 + (30 * i), 170, 170), hostList[i].gameName))
->>>>>>> newbrnach
                         JoinServer(hostList[i]);
                 }
             }
