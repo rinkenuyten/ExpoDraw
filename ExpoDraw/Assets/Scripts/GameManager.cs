@@ -41,7 +41,9 @@ public class GameManager : MonoBehaviour {
             GameObject screenshotManger = GameObject.Find("ScreenShotManager").gameObject;
             ScreenshotOnly ssManager = screenshotManger.GetComponent<ScreenshotOnly>();
             //CurrentCanvas
-            GameObject canvas = GameObject.Find("Canvas").gameObject;
+	        GameObject canvas = GameObject.Find("Canvas").gameObject;
+	        //Drawing Script
+	        DrawLinesTouch drawingScript = GameObject.Find("Main Camera Yamil").GetComponent<DrawLinesTouch>();
             //The done button
             GameObject buttonObj = GameObject.Find("Canvas/canvas options/canvas done/done").gameObject;
             Button button = buttonObj.GetComponent<Button>();
@@ -52,7 +54,8 @@ public class GameManager : MonoBehaviour {
             buttonObj = GameObject.Find("Canvas/canvas options/canvas done/back").gameObject;
             button = buttonObj.GetComponent<Button>();
             button.onClick.AddListener(() => canvas.SetActive(false));
-            button.onClick.AddListener(() => navGUI.MoveBack());
+	        button.onClick.AddListener(() => navGUI.MoveBack());
+	        button.onClick.AddListener(() => drawingScript.ClearLines());
             //The no button form the 'areyousurepopup'
             buttonObj = GameObject.Find("AreYouSurePopup/btnNo").gameObject;
             button = buttonObj.GetComponent<Button>();
