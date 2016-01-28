@@ -318,6 +318,6 @@ public class GameManager : MonoBehaviour {
     public void SetOpdracht(Opdracht opdracht)
     {
         this.ActieveOpdracht = opdracht;
-        cam.SendMessage("StartOpdracht", ActieveOpdracht);
+		cam.SendMessage("StartOpdracht", ActieveOpdracht, SendMessageOptions.DontRequireReceiver);
     }
 }
