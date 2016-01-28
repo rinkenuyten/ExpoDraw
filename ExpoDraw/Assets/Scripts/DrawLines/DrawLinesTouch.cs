@@ -65,7 +65,6 @@ public class DrawLinesTouch : MonoBehaviour {
                     previousPosition = touch.position;
                     line.points2.Add(touch.position);
                     canDraw = true;
-                    GetComponent<NetworkView>().RPC("TouchBegan", RPCMode.All, new object[] { new Vector3(touch.position.x, touch.position.y) });
                 }
                 else if (touch.phase == TouchPhase.Moved && (touch.position - previousPosition).sqrMagnitude > sqrMinPixelMove && canDraw)
                 {
@@ -76,51 +75,7 @@ public class DrawLinesTouch : MonoBehaviour {
                         canDraw = false;
                     }
                     line.Draw();
-                    GetComponent<NetworkView>().RPC("TouchEnd", RPCMode.All, new object[] { new Vector3(touch.position.x, touch.position.y) });
                 }
-            }
-        }
-    }
-
-    [RPC]
-    public void TouchBegan(Vector3 pos)
-    {
-        line.Draw();
-        previousPosition = new Vector2(pos.x, pos.y);
-        line.points2.Add(new Vector2(pos.x, pos.y));
-        canDraw = true;
-    }
-
-    [RPC]
-    public void ClearOtherScreen()
-    {
-        foreach (VectorLine line in Lines)
-        {
-            line.points2.Clear();
-            line.Draw();
-        }
-    }
-
-    [RPC]
-    public void TouchEnd(Vector3 pos)
-    {
-        previousPosition = new Vector2(pos.x, pos.y);
-        line.points2.Add(new Vector2(pos.x, pos.y));
-        if (line.points2.Count >= maxPoints)
-        {
-            canDraw = false;
-        }
-        line.Draw();
-    }
-
-    [RPC]
-    public void NewColor(string name)
-    {
-        foreach (VectorLine line in Lines)
-        {
-            if (line.name == name)
-            {
-                this.line = line;
             }
         }
     }
@@ -185,7 +140,6 @@ public class DrawLinesTouch : MonoBehaviour {
             line.points2.Clear();
             line.Draw();
         }
-        GetComponent<NetworkView>().RPC("ClearOtherScreen", RPCMode.All, null);
     }
 
     public void setColor(string colorname)
@@ -214,7 +168,6 @@ public class DrawLinesTouch : MonoBehaviour {
 				this.line = line;
 			}
 		}
-        GetComponent<NetworkView>().RPC("NewColor", RPCMode.All, new object[] { newLineName });
 	}
 	
     public void ToggleCanDraw(bool Boel)
