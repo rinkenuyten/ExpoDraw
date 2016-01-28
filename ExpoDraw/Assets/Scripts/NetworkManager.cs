@@ -26,14 +26,14 @@ public class NetworkManager : MonoBehaviour {
     {
         if (!Network.isClient && !Network.isServer)
         {
-            if (GUI.Button(new Rect(0, 0, 60, 60), "Start Server"))
+            if (GUI.Button(new Rect(0, 0, 160, 160), "Start Server"))
                 StartServer();
 
             if (hostList != null)
             {
                 for (int i = 0; i < hostList.Length; i++)
                 {
-                    if (GUI.Button(new Rect(70, 0 + (30 * i), 60, 60), hostList[i].gameName))
+                    if (GUI.Button(new Rect(170, 0 + (30 * i), 170, 170), hostList[i].gameName))
                         JoinServer(hostList[i]);
                 }
             }
