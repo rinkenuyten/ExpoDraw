@@ -186,7 +186,7 @@ public class NavigateGUI : MonoBehaviour {
                     toMoveAndRefresh = c;
                 }
             }
-            int yPos = 200;
+            int yPos = 400;
             //Displaying all found tasks
             foreach (Opdracht o in tasks)
             {
@@ -210,7 +210,7 @@ public class NavigateGUI : MonoBehaviour {
 
                 cashingObjects.Add(objTask);
 
-                yPos -= 40;
+                yPos -= 100;
             }
         }
         else if (currentCanvas.name == "DescriptionCanvas")
