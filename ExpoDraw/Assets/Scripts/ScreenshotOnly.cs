@@ -24,25 +24,24 @@ public class ScreenshotOnly : MonoBehaviour {
 
     public void MakeScreenshot()
     {
-        if (firstScreenshot)
-        {
-            DirectoryInfo di = new DirectoryInfo(Application.persistentDataPath);
-            FileInfo[] fi = di.GetFiles();
-            foreach (FileInfo fiTemp in fi)
-            {
-                if (Path.GetExtension(customPath + fiTemp) == ".png")
-                {
-                    index++;
-                }
-            }
-            firstScreenshot = false;
-        }
-
-        string path = customPath + imageName + index + ".png";
-        Application.CaptureScreenshot(path, resolution);
-        index++;
-        Debug.Log("Take Screenshot" + index);
-        Debug.LogWarning("Screenshot saved: " + customPath + "-- - " + imageName + index);
+	    if (firstScreenshot)
+	    {
+		    DirectoryInfo di = new DirectoryInfo(Application.persistentDataPath);
+		    FileInfo[] fi = di.GetFiles();
+		    foreach (FileInfo fiTemp in fi)
+		    {
+			    if (Path.GetExtension(customPath + fiTemp) == ".png")
+			    {
+				    index++;
+			    }
+		    }
+		    firstScreenshot = false;
+	    }
+	    Application.CaptureScreenshot("Screenshot_" + index + ".png");
+	    string path = System.IO.Path.Combine(Application.persistentDataPath, "Screenshot_" + index + ".png");
+	    
+	    if (File.Exists(Application.persistentDataPath)) { WWW loadedImage = new WWW("file://" + path); }
+	    index++;
 
         
         GameObject canvas = GameObject.Find("Canvas").gameObject;
