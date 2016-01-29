@@ -7,7 +7,8 @@ public class UIScript : MonoBehaviour {
     public Camera AccessCamera;
 	public GameObject MenuButton1;
 	public GameObject MenuButton2;
-	private bool expanded = false;
+	private bool expandedMenu = false;
+    private bool expandedDrawing = false;
 	
 
 	private Color selectedColor;
@@ -95,15 +96,18 @@ public class UIScript : MonoBehaviour {
 	}
 
 	public void MenuButton1Click(){
-		if (!expanded) {
-			expanded = true;
-			MenuButton2.SetActive (false);
+		if (!expandedMenu) {
+            expandedMenu = true;
+			//MenuButton2.SetActive (false);
 
 			MenuButton1.transform.FindChild ("canvas tools").gameObject.SetActive (true);
 			MenuButton1.transform.FindChild ("canvas done").gameObject.SetActive (true);
+            MenuButton2.transform.FindChild("painterboard tools").gameObject.SetActive(false);
+            MenuButton2.transform.FindChild("painterboard colors").gameObject.SetActive(false);
+            expandedDrawing = false;
 		} else {
-			expanded = false;
-			MenuButton2.SetActive (true);
+            expandedMenu = false;
+			//MenuButton2.SetActive (true);
 
 			MenuButton1.transform.FindChild ("canvas tools").gameObject.SetActive (false);
 			MenuButton1.transform.FindChild ("canvas done").gameObject.SetActive (false);
@@ -111,15 +115,18 @@ public class UIScript : MonoBehaviour {
 	}
 
 	public void MenuButton2Click(){
-		if (!expanded) {
-			expanded = true;
-			MenuButton1.SetActive (false);
+		if (!expandedDrawing) {
+            expandedDrawing = true;
+			//MenuButton1.SetActive (false);
 
 			MenuButton2.transform.FindChild ("painterboard tools").gameObject.SetActive (true);
 			MenuButton2.transform.FindChild ("painterboard colors").gameObject.SetActive (true);
+            MenuButton1.transform.FindChild("canvas tools").gameObject.SetActive(false);
+            MenuButton1.transform.FindChild("canvas done").gameObject.SetActive(false);
+            expandedMenu = false;
 		} else {
-			expanded = false;
-			MenuButton1.SetActive (true);
+            expandedDrawing = false;
+			//MenuButton1.SetActive (true);
 
 			MenuButton2.transform.FindChild ("painterboard tools").gameObject.SetActive (false);
 			MenuButton2.transform.FindChild ("painterboard colors").gameObject.SetActive (false);

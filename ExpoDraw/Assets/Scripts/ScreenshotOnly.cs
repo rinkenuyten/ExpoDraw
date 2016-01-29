@@ -42,7 +42,7 @@ public class ScreenshotOnly : MonoBehaviour {
         Application.CaptureScreenshot(path, resolution);
         index++;
         Debug.Log("Take Screenshot" + index);
-        Debug.LogWarning("Screenshot saved: " + customPath + "-- - " + imageName + index);
+        Debug.Log("Screenshot saved: " + customPath + "-- - " + imageName + index);
 
         
         GameObject canvas = GameObject.Find("Canvas").gameObject;
